@@ -29,6 +29,7 @@ class ProductosAPIController
         header('Content-Type: application/json; charset=UTF-8');
 
         // Convertir el array de productos a formato JSON
+        //return response()->json($productos);
         return json_encode($productos);
         
     }
