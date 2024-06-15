@@ -136,6 +136,17 @@
         return (new CitasController())->mostrarCitas();
     });
 
+    Router::add('POST', '/eliminar_cita', function () {
+        // Verificar si se ha enviado el formulario para eliminar un producto del carrito
+        if (isset($_POST['cita_id'])) {
+            // Obtener el ID del producto desde el formulario
+            $cita_id = $_POST['cita_id'];
+            
+            // Llamar al método eliminarDelCarrito del controlador CarritoController
+            return (new CitasController())->eliminarCita($cita_id);
+        }
+    });
+
      /********************* PRODUCTOS  ******************************/
 
 

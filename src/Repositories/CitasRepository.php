@@ -16,7 +16,7 @@
             $citaCommit = null;
             try {
                 $this->sql = $this->conexion->prepareSQL("
-                                                        SELECT  c.cita_id, 
+                                                        SELECT  c.id, 
                                                                 c.fecha_hora, 
                                                                 c.descripcion, 
                                                                 c.usuario_id,

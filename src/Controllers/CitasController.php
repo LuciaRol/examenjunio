@@ -33,7 +33,7 @@ class citasController
         foreach ($citas as $cita) {
             // Crear una nueva instancia de cita con los datos del cita
             $citaModel = new Cita(
-                $cita['cita_id'],
+                $cita['id'],
                 $cita['fecha_hora'],
                 $cita['descripcion'],
                 $cita['usuario_id'],

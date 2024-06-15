@@ -77,13 +77,13 @@ CREATE TABLE IF NOT EXISTS clientes_cita(
 
 DROP TABLE IF EXISTS citas;
 CREATE TABLE IF NOT EXISTS citas(
-    cita_id INT AUTO_INCREMENT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL,
     fecha_hora DATETIME NOT NULL,
     descripcion TEXT,
     usuario_id INT NOT NULL,
     cliente_id INT NOT NULL,
     fecha_registro DATETIME NOT NULL,
-    CONSTRAINT pk_citas PRIMARY KEY (cita_id),
+    CONSTRAINT pk_citas PRIMARY KEY (id),
     CONSTRAINT fk_cita_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     CONSTRAINT fk_cita_cliente FOREIGN KEY (cliente_id) REFERENCES clientes_cita(cliente_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

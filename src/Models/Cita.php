@@ -4,7 +4,7 @@ namespace Models;
 
 class Cita
 {
-    private int $cita_id;
+    private int $id;
     private string $fecha_hora;
     private ?string $descripcion;
     private int $usuario_id;
@@ -14,7 +14,7 @@ class Cita
     private string $nombre_cliente;
 
     public function __construct(
-        int $cita_id,
+        int $id,
         string $fecha_hora,
         ?string $descripcion,
         int $usuario_id,
@@ -23,7 +23,7 @@ class Cita
         string $nombre_usuario,
         string $nombre_cliente,
     ) {
-        $this->cita_id = $cita_id;
+        $this->id = $id;
         $this->fecha_hora = $fecha_hora;
         $this->descripcion = $descripcion;
         $this->usuario_id = $usuario_id;
@@ -35,7 +35,7 @@ class Cita
 
     public function getCitaId(): int
     {
-        return $this->cita_id;
+        return $this->id;
     }
 
     public function getFechaHora(): string
