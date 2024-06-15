@@ -116,12 +116,12 @@ class CarritoController
         if ($usuarioController->sesion_usuario()) {
             $emailSesion = $usuarioController->obtenerEmailUsuario($emailSesion);
             
-            $this->pagina->render('mostrarCarrito', ['emailSesion' => $emailSesion]);
+            $this->pagina->render('Carrito/mostrarCarrito', ['emailSesion' => $emailSesion]);
         }
         else{
             $mensaje = "Tienes que registrarte para poder ver el carrito";
-            $categoriasController = new CategoriasController();
-            $categoriasController->mostrarTodos($emailSesion, $mensaje);
+            $WebController = new WebController();
+            $WebController->mostrarBienvenida($emailSesion, $mensaje);
         }
     }
 

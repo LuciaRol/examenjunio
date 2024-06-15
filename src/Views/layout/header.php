@@ -20,7 +20,7 @@
     <div class="header_second_div">
         <div class="search_container">
             <form action="<?=  BASE_URL ?>busqueda" method="POST">
-                <input class="search_input" type="text" name="q" placeholder="Busca">
+                <input class="search_input" type="text" name="q" placeholder="Busca categoría o nombre">
                 <button type="submit" class="search_button login_btn">Buscar</button>
             </form>  
         </div>

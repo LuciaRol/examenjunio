@@ -22,8 +22,6 @@ class ProductosController
         $this->productosService = new ProductosService();
         // Crea una instancia del servicio de usuarios
         $this->usuariosService = new UsuariosService();
-        
-        
     }
 
     public function mostrarProductos($emailRecordado = null, $mensaje = null): void
@@ -62,11 +60,11 @@ class ProductosController
             // Verifica si el usuario tiene permisos de administrador
             $rol = $email->getRol();
             }
-
+        // Se llama a las categorias para poder mostrar el desplegable al crear nuevos productos
         $categoriasController = new CategoriasController();
         $categorias = $categoriasController->todasCategorias();
         // Devolver la renderización de la página con los objetos de producto y el correo electrónico de la sesión
-        $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
+        $this->pagina->render('Productos/mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
     }
 
     public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen): void {
@@ -209,7 +207,7 @@ public function buscarProductos($terminoBusqueda): void
         $categorias = $categoriasController->todasCategorias();
 
         // Devolver la renderización de la página con los resultados de búsqueda
-        $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
+        $this->pagina->render('Productos/mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
     }
 
 }

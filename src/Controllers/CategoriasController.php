@@ -41,7 +41,7 @@ class CategoriasController {
             $rol = $email->getRol(); }
 
         // Devolver la renderización de la página con los objetos de categoría, el correo electrónico de la sesión y el mensaje
-        $this->pagina->render('mostrarCategorias', [
+        $this->pagina->render('Categorias/mostrarCategorias', [
             'categorias' => $categoriasModel, 
             'emailSesion' => $emailSesion, 
             'mensaje' => $mensaje,

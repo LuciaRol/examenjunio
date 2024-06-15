@@ -34,7 +34,7 @@ class WebController{
 
 
 
-        $this->pagina->render('mostrarBienvenida', ['emailSesion' => $emailSesion, 'mensajeError'=>$mensajeError]);
+        $this->pagina->render('Inicio/mostrarBienvenida', ['emailSesion' => $emailSesion, 'mensajeError'=>$mensajeError]);
         
     }
 }
