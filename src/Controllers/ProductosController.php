@@ -67,6 +67,21 @@ class ProductosController
         $this->pagina->render('Productos/mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
     }
 
+
+
+    public function mostrarProductosAPI(): string
+    {
+        // Obtener todos los productos
+        $productos = $this->productosService->obtenerProductos();
+
+        // Convertir el array de productos a formato JSON
+        $response = json_encode($productos);
+
+        // Devolver la respuesta JSON
+        return $response;
+    }
+    
+
     public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen): void {
         $mensaje = 'Regístrate como admin para crear un producto'; // Inicializamos la variable de mensaje
         

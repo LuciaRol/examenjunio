@@ -11,6 +11,8 @@
    use Controllers\WebController;
    use Controllers\LoginController;
    use Controllers\RegistroController;
+   use Controllers\ProductosAPIController;
+   use Services\ProductosService;
 
   class Routes{
     public static function index(){
@@ -266,6 +268,12 @@
                 return (new ProductosController())->buscarProductos($terminoBusqueda);
             }
         });
+
+    /********************* API  ******************************/
+
+    Router::add('GET', '/api_producto', function () {
+        return (new ProductosAPIController())->mostrarProductosAPI();
+    });
 
     /********************* ERROR  ******************************/
 
