@@ -26,8 +26,8 @@
                 return null; // Devuelve null si las credenciales son incorrectas
             }
         }
-
-                public function verificaCredenciales(string $email, string $password): ?Usuarios {
+        //utilizar esta funcion si no ciframos contrasena
+        public function verificaCredenciales(string $email, string $password): ?Usuarios {
             $user = $this->userRepository->findByemail($email);
             
             // Verifica que el usuario exista y que la contraseña coincida

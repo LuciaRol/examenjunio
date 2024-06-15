@@ -8,14 +8,20 @@
    use Controllers\CarritoController;
    use Lib\Router;
    use Controllers\ErrorController;
+   use Controllers\WebController;
 
   class Routes{
     public static function index(){
         /*Router::add('GET','/', function (){
             return "Bienvenido";
         });*/
-        
         Router::add('GET','/', function () {
+            return (new WebController())->mostrarBienvenida();
+          });
+    
+    
+        
+        Router::add('GET','/categorias', function () {
             return (new CategoriasController())->mostrarTodos();
         });
         Router::add('GET','/productos', function (){

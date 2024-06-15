@@ -3,10 +3,11 @@
     <div class="header_first_div">
         <div class="header_principal">
             <div ><img class="principal_logo" src="public/img/logo.png" alt=""></div>
-            <h1 class="principal_title">Zapatería Correcaminos</h1>
+            <h1 class="principal_title">Examen Junio</h1>
         </div>
         <nav class="nav_container">
             <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
+            <a class="nav_link" href="<?= BASE_URL ?>categorias">Categorias</a>
             <a class="nav_link" href="<?= BASE_URL ?>productos">Productos</a>
             <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
