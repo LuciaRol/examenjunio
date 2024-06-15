@@ -39,59 +39,8 @@ class UsuarioController {
         return $categoriasController->mostrarTodos();
         
         }
-
-        
-    public function login($email, $password) {
-        
-        $error = ''; // Creamos esta variable para que si todo va bien, no de error al mostrarBlog
-    
-        if ($email && $password) {
-            $user = $this->usuariosService->verificaCredenciales($email, $password);
-            if ($user) {
-                session_start();
-                $_SESSION['email'] = $user->getEmail();
-                
-                // Si se marca la casilla de "recordar usuario", establecer la cookie
-                
-                // Establecer el nombre de usuario como valor de la cookie
-                setcookie("email_recordado", $user->getEmail(), time() + (30 * 24 * 60 * 60), "/");
-                
-                
-            } else {
-                $error = 'Email o contraseña incorrecta';
-            }
-        } 
-    
-        // Verificar si la cookie "email_recordado" existe y establecer la variable $emailRecordado
-        $emailRecordado = isset($_COOKIE['email_recordado']) ? $_COOKIE['email_recordado'] : null;
-    
-        // Llama a mostrarBlog con el posible mensaje de error del login y la variable $emailRecordado
-        $CategoriasController = new CategoriasController();
-
-        return $CategoriasController->mostrarTodos($emailRecordado);
-        
-    }
-
-    public function logout() {
-        // Inicia la sesión si no ha sido iniciada ya
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        // Destruye la sesión
-        session_destroy();
-    
-        // Elimina la cookie de email_recordado si existe
-        if (isset($_COOKIE['email_recordado'])) {
-            unset($_COOKIE['email_recordado']);
-            setcookie('email_recordado', '', time() - 3600, '/');
-        }
-    
-        // Redirige a mostrarTodos en CategoriasController
-        $CategoriasController = new CategoriasController();
-
-        return $CategoriasController->mostrarTodos();
-    }
-    public function sesion_usuario(): bool {
+       
+       public function sesion_usuario(): bool {
         // Inicia la sesión si no ha sido iniciada ya
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

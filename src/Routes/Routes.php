@@ -9,17 +9,44 @@
    use Lib\Router;
    use Controllers\ErrorController;
    use Controllers\WebController;
+   use Controllers\LoginController;
 
   class Routes{
     public static function index(){
-        /*Router::add('GET','/', function (){
-            return "Bienvenido";
-        });*/
+        /* Bienvenida */ 
         Router::add('GET','/', function () {
             return (new WebController())->mostrarBienvenida();
           });
     
+        /* Login */
+
+      Router::add('GET','/iniciosesion', function () {
+        return (new LoginController())->mostrarLogin();
+      });
+
+
+      Router::add('POST', '/login', function () {
+        // Verificar si se ha enviado el formulario de inicio de sesión
+        if (isset($_POST['email']) && isset($_POST['password'])) {
+            // Obtener el nombre de usuario y la contraseña del formulario
+            $email = $_POST['email'];
+            $password = $_POST['password'];
     
+            // Crear una instancia del controlador de usuarios
+            $LoginController = new LoginController();
+            // Llamar al método login del controlador de usuarios con el nombre de usuario y la contraseña
+            $LoginController->login($email, $password);
+        }
+    });
+
+      
+    Router::add('POST','/logout', function (){
+        return (new LoginController())->logout();
+    }); 
+
+
+
+
         
         Router::add('GET','/categorias', function () {
             return (new CategoriasController())->mostrarTodos();
@@ -27,6 +54,11 @@
         Router::add('GET','/productos', function (){
             return (new ProductosController())->mostrarProductos();
         });
+    
+      
+
+
+
 
         Router::add('POST', '/registro_usuario', function () {
             // Verifica si se ha enviado el formulario de registro
@@ -45,23 +77,8 @@
         });
 
 
-        Router::add('POST', '/login', function () {
-            // Verificar si se ha enviado el formulario de inicio de sesión
-            if (isset($_POST['email']) && isset($_POST['password'])) {
-                // Obtener el nombre de usuario y la contraseña del formulario
-                $email = $_POST['email'];
-                $password = $_POST['password'];
         
-                // Crear una instancia del controlador de usuarios
-                $usuariosController = new UsuarioController();
-                // Llamar al método login del controlador de usuarios con el nombre de usuario y la contraseña
-                $usuariosController->login($email, $password);
-            }
-        });
         
-        Router::add('POST','/logout', function (){
-            return (new UsuarioController())->logout();
-        }); 
 
         Router::add('GET','/pedidos', function (){
             return (new PedidosController())->mostrarPedidos();
