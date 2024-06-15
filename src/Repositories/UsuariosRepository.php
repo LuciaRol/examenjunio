@@ -73,6 +73,7 @@
                         $usuarioData['id'],
                         $usuarioData['nombre'],
                         $usuarioData['apellidos'],
+                        $usuarioData['usuario'],
                         $usuarioData['email'],
                         $usuarioData['contrasena'],
                         $usuarioData['rol']
@@ -88,6 +89,7 @@
 
         public function actualizarUsuario(string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
             try {
+                // Esta query actualiza el usuario. Cambiar email por usuario dependiendo de cual sea el campo clave de cada apliación
                 $this->sql = $this->conexion->prepareSQL("UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, rol = :rol WHERE email = :email");
                 $this->sql->bindValue(":nombre", $nombre, PDO::PARAM_STR);
                 $this->sql->bindValue(":apellidos", $apellidos, PDO::PARAM_STR);

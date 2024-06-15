@@ -10,6 +10,7 @@ class Usuarios
         private string $id,
         private string $nombre,
         private string $apellidos,
+        private string $usuario,
         private string $email,
         private string $contrasena,
         private string $rol
@@ -84,6 +85,18 @@ class Usuarios
         $this->rol = $rol;
         return $this;
     }
+
+    public function getUsuario(): string
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(string $usuario): self
+    {
+        $this->usuario = $usuario;
+        return $this;
+    }
+
     /**
      * Crea un usuario a partir de un array
      */
@@ -93,6 +106,7 @@ class Usuarios
             $data['id'] ?? '',
             $data['nombre'] ?? '',
             $data['apellidos'] ?? '',
+            $data['usuario'] ?? '',
             $data['email'] ?? '',
             $data['contrasena'] ?? '',
             $data['rol'] ?? 'usur' // Si el rol no está presente, se establecerá como 'usur' por defecto

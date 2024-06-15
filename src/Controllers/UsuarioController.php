@@ -18,29 +18,13 @@ class UsuarioController {
         // Crea una nueva instancia de Pages
         $this->pagina = new Pages();
         // Crea una instancia del servicio de categorías
-        $this->categoriasService = new CategoriasService();
-        
         $this->usuariosService = new UsuariosService();
 
         $this->MailController = new MailController();
 
     }
 
-    public function registroUsuario($nombre, $apellidos, $email, $contrasena, $rol) {
-        // Verificar si se ha enviado el formulario de registro
-    
-        $usuariosService = new UsuariosService();
-        $resultado = $usuariosService->register($nombre, $apellidos, $email, $contrasena, $rol);
-        
-        $MailController = new MailController();
-        $MailController->mailregistro($nombre, $email);
-
-        $categoriasController = new CategoriasController();
-        return $categoriasController->mostrarTodos();
-        
-        }
-       
-       public function sesion_usuario(): bool {
+    public function sesion_usuario(): bool {
         // Inicia la sesión si no ha sido iniciada ya
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -72,9 +56,9 @@ class UsuarioController {
     
         // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
         if (!$emailSesion) {
-            $mensaje = "Tienes que registrarte para poder ver tu usuario";
-            $categoriasController = new CategoriasController();
-            return $categoriasController->mostrarTodos($emailSesion, $mensaje);
+            $mensaje[] = "Tienes que registrarte para poder ver tu usuario";
+            $WebController = new WebController();
+            return $WebController->mostrarBienvenida($emailSesion, $mensaje);
         }
     
         // Obtén los datos del usuario autenticado
@@ -90,9 +74,11 @@ class UsuarioController {
         $apellidos = $usuario->getApellidos();
         $email = $usuario->getEmail();
         $rol = $usuario->getRol();
+        $nombre_usuario = $usuario->getUsuario();
+        
     
         // Preparar los datos para renderizar la vista de usuario
-        $data = compact('nombre', 'apellidos', 'email', 'rol');
+        $data = compact('nombre', 'apellidos', 'nombre_usuario', 'email', 'rol');
     
         // Agregar el mensaje de error a los datos si está presente
         if ($error !== null) {
@@ -106,7 +92,7 @@ class UsuarioController {
         }
     
         // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
-        $this->pagina->render("mostrarUsuario", $data);
+        $this->pagina->render("Usuario/mostrarUsuario", $data);
         
     }
 
@@ -119,7 +105,7 @@ class UsuarioController {
 
     public function actualizarUsuario($nombre, $apellidos, $email, $rol) {
         // Validar y sanear los datos
-        $usuarioValidado = $this->validarSaneaUsuario($nombre, $apellidos, $email, $rol);
+        $usuarioValidado = $this->validarSaneaUsuario($nombre, $apellidos, $rol);
         
         // Check if the user data is valid
         if (!$usuarioValidado) {
@@ -145,7 +131,7 @@ class UsuarioController {
         $resultado = $this->usuariosService->actualizarUsuario(
             $usuarioValidado['nombre'],
             $usuarioValidado['apellidos'],
-            $usuarioValidado['email'],
+            $email, // no se lleva a validar, dado que es el campo identificativo en esta aplicación
             $usuarioValidado['rol']
         );
     
@@ -158,9 +144,9 @@ class UsuarioController {
         }
     }
     
-    public function validarSaneaUsuario( $nombre, $apellidos, $email, $rol) {
+    public function validarSaneaUsuario( $nombre, $apellidos, $rol) {
         // Validar los valores
-        $errores = Validacion::validarDatosUsuario($nombre, $apellidos, $email, $rol);
+        $errores = Validacion::validarDatosUsuario($nombre, $apellidos, $rol);
     
         // Si hay errores, asignar el mensaje de error a una variable
         if (!empty($errores)) {
@@ -172,7 +158,7 @@ class UsuarioController {
         }
     
         // Saneamiento de los campos
-        $usuarioSaneado = Validacion::sanearCamposUsuario($nombre, $apellidos, $email, $rol);
+        $usuarioSaneado = Validacion::sanearCamposUsuario($nombre, $apellidos, $rol);
         
         // Asignar los valores saneados de vuelta a las variables originales
         

@@ -6,7 +6,24 @@
     <title>Bienvenida - Plantilla de Examen</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+
 <body>
+
+
+
+<?php
+    // Verificar si hay errores de registro y mostrar el mensaje
+    if (isset($mensajeError) && is_array($mensajeError)) {
+        echo "<ul>";
+        foreach ($mensajeError as $error) {
+            echo "<li>$error</li>";
+        }
+        echo "</ul>";
+    }
+    ?>
+
+
     <div class="container">
         <h1>ESTA ES LA BIENVENIDA</h1>
         <p>Bienvenido a la plantilla de examen. A continuación, se explican los puntos clave que abarca esta plantilla:</p>

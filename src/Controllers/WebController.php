@@ -27,6 +27,11 @@ class WebController{
             $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
             }
 
+        // Verificar si hay errores y convertir a array si es necesario
+        if (!is_array($mensajeError) && $mensajeError !== null) {
+            $mensajeError = [$mensajeError];
+        }
+
 
 
         $this->pagina->render('mostrarBienvenida', ['emailSesion' => $emailSesion, 'mensajeError'=>$mensajeError]);
