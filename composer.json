@@ -1,10 +1,10 @@
 {
-    "name": "lucia/zapateria",
-    "description": "web de una tienda de zapatos",
+    "name": "lucia/examenjunio",
+    "description": "Esta es la plantilla para el examen de Junio",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Lucia\\zapateria\\": "src/",
+            "Lucia\\examenjunio\\": "src/",
             "Routes\\": "src/Routes/",
             "Controllers\\": "src/Controllers/",
             "Lib\\": "src/Lib/",

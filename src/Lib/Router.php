@@ -20,7 +20,7 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD']; 
         //print_r($_SERVER);die($method);
         
-        $action = preg_replace('#zapateria#','',$_SERVER['REQUEST_URI']);
+        $action = preg_replace('#examenjunio#','',$_SERVER['REQUEST_URI']);
        //$_SERVER['REQUEST_URI'] almacena la cadena de texto que hay después del nombre del host en la URL
         $action = trim($action, '/');
 
@@ -39,7 +39,7 @@ class Router {
             $callback = self::$routes[$method][$action];
             echo call_user_func($callback, $param);
         }else{
-            header('Location: /zapateria/error/'); //esto es una vista 
+            header('Location: /examenjunio/error/'); //esto es una vista 
         }
         
         
