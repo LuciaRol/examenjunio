@@ -3,8 +3,8 @@ USE examenjunio;
 -- Insertar datos en la tabla usuarios
 INSERT INTO usuarios (nombre, apellidos, email, contrasena, rol) VALUES
     ('admin', 'admin', 'admin@admin.com', 'admin', 'admin'),
-    ('user1', 'user1', 'user1@user1.com', 'user1', 'user'),
-    ('user2', 'user2', 'user2@user2.com', 'user2', 'user');
+    ('user1', 'user1', 'user1@user1.com', 'user1', 'usur'),
+    ('user2', 'user2', 'user2@user2.com', 'user2', 'usur');
 
 -- Insertar datos en la tabla categorias
 INSERT INTO categorias (nombre) VALUES
