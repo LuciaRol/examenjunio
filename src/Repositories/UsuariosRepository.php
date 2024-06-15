@@ -54,7 +54,20 @@
             return $resultado;
         }
 
-
+        public function borrarUsuario(int $usuario_id): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("DELETE FROM usuarios WHERE id = :usuario_id");
+                $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->execute();
+                
+                // Verificar si se eliminó correctamente el producto
+                return true;
+                
+            } catch (PDOException $e) {
+                // Manejar la excepción si ocurre algún error durante la ejecución de la consulta
+                return false;
+            }
+        }
 
         public function findByemail(string $email): ?Usuarios {
             try {

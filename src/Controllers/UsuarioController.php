@@ -161,7 +161,29 @@ class UsuarioController {
         return $usuarioSaneado;
     }
 
+    public function borrarUsuario($usuario_id) {
 
+         // Obtener el email del usuario
+        $usuarioController = new UsuarioController();
+        $emailSesion = $usuarioController->obtenerEmailUsuario(null);
+
+        // Verifica si el usuario está autenticado y obtenemos su rol
+        if ($usuarioController->sesion_usuario()) {
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            $rol = $email->getRol();
+        }
+
+        if ($rol === 'admin'){
+            $usuario = $this->usuariosService->borrarUsuario($usuario_id);
+            
+            $mensaje = "Usuario borrado correctamente";
+        } else {
+            $mensaje = "Tienes que tener permisos de administrador para poder borrar un usuario";
+            
+    }
+    $this->mostrarUsuario($mensaje);
+
+    }
     
 }
 

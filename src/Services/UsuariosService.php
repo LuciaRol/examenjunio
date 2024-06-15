@@ -40,7 +40,10 @@
             }
         }
 
-
+        
+        public function borrarUsuario(int $usuario_id): ?bool {
+            return $this->userRepository->borrarUsuario($usuario_id);
+        }  
 
         public function obtenerUsuarioPorEmail(string $email): ?Usuarios {
             return $this->userRepository->findByEmail($email);

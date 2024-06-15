@@ -91,6 +91,21 @@
         }
     });
 
+    Router::add('POST', '/borrar_usuario', function () {
+        // Verifica si se ha enviado el formulario para borrar el usuario
+        if (isset($_POST['usuario_id'])) {
+            $usuario_id = $_POST['usuario_id'];
+            
+            // Crear una instancia del controlador de usuarios
+            $usuariosController = new UsuarioController();
+            
+            // Llama al método para borrar usuario del controlador de usuarios
+            $usuariosController->borrarUsuario($usuario_id);
+        }
+    });
+
+
+
     /********************* CATEGORIAS  ******************************/
 
         
@@ -226,14 +241,6 @@
             return (new CarritoController())->eliminarDelCarrito($productoId);
         }
     });
-
-
-
-        
-
-
-        
-        
         
 
     Router::add('POST', '/comprar_carrito', function () {

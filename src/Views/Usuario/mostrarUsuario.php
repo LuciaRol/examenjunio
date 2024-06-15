@@ -67,7 +67,7 @@
                         <tbody>
                             <?php foreach ($usuarios as $usuario): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
+                                    <td><?php echo htmlspecialchars($usuario['id']); ?></td>
                                     <td><?php echo htmlspecialchars($usuario['apellidos']); ?></td>
                                     <td><?php echo htmlspecialchars($usuario['usuario']); ?></td>
                                     <td><?php echo htmlspecialchars($usuario['email']); ?></td>
@@ -83,6 +83,10 @@
                                                 <option value="usur" <?php if ($usuario['rol'] === 'usur') echo 'selected'; ?>>usur</option>
                                             </select>
                                             <input type="submit" value="Guardar" class="user-form-submit">
+                                        </form>
+                                        <form action="<?= BASE_URL ?>borrar_usuario" method="POST" class="user-form">
+                                            <input type="hidden" name="usuario_id" value="<?= $usuario['id'] ?>">
+                                            <input type="submit" value="Eliminar" class="user-form-submit">
                                         </form>
                                     </td>
                                 </tr>
