@@ -24,32 +24,6 @@ class UsuarioController {
 
     }
 
-    public function sesion_usuario(): bool {
-        // Inicia la sesión si no ha sido iniciada ya
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        // Verifica si el email del usuario está presente en la sesión
-        return isset($_SESSION['email']);
-    }
-
-    // Función para obtener el email del usuario desde la sesión o la cookie
-    function obtenerEmailUsuario($emailRecordado) {
-        // Start session if not already started
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        
-        // Obtener el email de la sesión si está presente
-        $emailSesion = isset($_SESSION['email']) ? $_SESSION['email'] : null;
-
-        // Si no hay email en la sesión, intentar obtenerlo de la cookie
-        if (!$emailSesion) {
-            $emailSesion = $emailRecordado ?? (isset($_COOKIE['email_recordado']) ? $_COOKIE['email_recordado'] : null);
-        }
-
-        return $emailSesion;
-    }
     public function mostrarUsuario($error = null) {
         // Obtener el email del usuario utilizando la función obtenerEmailUsuario
         $emailSesion = $this->obtenerEmailUsuario(null);
@@ -96,12 +70,33 @@ class UsuarioController {
         
     }
 
-    public function mostrarRegistro($error = null) {
-        // Obtener el email del usuario utilizando la función obtenerEmailUsuario
-        
-        // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
-        $this->pagina->render("mostrarRegistro");
+    public function sesion_usuario(): bool {
+        // Inicia la sesión si no ha sido iniciada ya
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Verifica si el email del usuario está presente en la sesión
+        return isset($_SESSION['email']);
     }
+
+    // Función para obtener el email del usuario desde la sesión o la cookie
+    function obtenerEmailUsuario($emailRecordado) {
+        // Start session if not already started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // Obtener el email de la sesión si está presente
+        $emailSesion = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+
+        // Si no hay email en la sesión, intentar obtenerlo de la cookie
+        if (!$emailSesion) {
+            $emailSesion = $emailRecordado ?? (isset($_COOKIE['email_recordado']) ? $_COOKIE['email_recordado'] : null);
+        }
+
+        return $emailSesion;
+    }
+    
 
     public function actualizarUsuario($nombre, $apellidos, $email, $rol) {
         // Validar y sanear los datos

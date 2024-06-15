@@ -16,11 +16,11 @@ INSERT INTO categorias (nombre) VALUES
 
 -- Insertar datos en la tabla productos
 INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) VALUES
-(1, 'Producto1', 'Descripción del producto1.', 10.00, 50, '0', '2024-05-01', 'producto1.jpg'),
-(2, 'Producto2', 'Descripción del producto2.', 20.00, 30, '1', '2024-04-15', 'producto2.jpg'),
-(3, 'Producto3', 'Descripción del producto3.', 30.00, 100, '0', '2024-03-10', 'producto3.jpg'),
-(4, 'Producto4', 'Descripción del producto4.', 40.00, 80, '1', '2024-02-25', 'producto4.jpg'),
-(5, 'Producto5', 'Descripción del producto5.', 50.00, 200, '0', '2024-01-20', 'producto5.jpg');
+(1, 'Producto1', 'Descripción del producto1.', 10.00, 50, '0', '2024-05-01', 'imagen1.jpg'),
+(2, 'Producto2', 'Descripción del producto2.', 20.00, 30, '1', '2024-04-15', 'imagen2.jpg'),
+(3, 'Producto3', 'Descripción del producto3.', 30.00, 100, '0', '2024-03-10', 'imagen3.jpg'),
+(4, 'Producto4', 'Descripción del producto4.', 40.00, 80, '1', '2024-02-25', 'imagen4.jpg'),
+(5, 'Producto5', 'Descripción del producto5.', 50.00, 200, '0', '2024-01-20', 'imagen5.jpg');
 
 -- Insertar datos en la tabla pedidos
 /*INSERT INTO pedidos (usuario_id, provincia, localidad, direccion, coste, estado, fecha, hora) VALUES

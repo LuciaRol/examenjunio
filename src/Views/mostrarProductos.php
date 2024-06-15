@@ -103,8 +103,8 @@
 
                     <label for="imagen">Imagen:</label><br>
                     <select id="imagen" name="imagen" required class="registro-select">
-                        <?php for ($i = 1; $i <= 10; $i++): ?>
-                            <option value="zapato<?php echo $i; ?>.jpg">Zapato<?php echo $i; ?></option>
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <option value="imagen<?php echo $i; ?>.jpg">Imagen<?php echo $i; ?></option>
                         <?php endfor; ?>
                     </select><br><br>
 
