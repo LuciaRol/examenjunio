@@ -57,6 +57,7 @@ class citasController
             $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
             // Verifica si el usuario tiene permisos de administrador
             $rol = $email->getRol();
+            $usuario_id = $email ->getId();
             }
           // Se llama a los clientes para poder mostrar el desplegable al crear nuevas citas
           $clientesController = new clientesController();
@@ -64,15 +65,16 @@ class citasController
         
 
         // Devolver la renderización de la página con los objetos de cita y el correo electrónico de la sesión
-        $this->pagina->render('citas/mostrarcitas', ['citas' => $citasModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'clientes' =>$clientes]);
+        $this->pagina->render('citas/mostrarcitas', ['citas' => $citasModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'clientes' =>$clientes, 'usuario_id' => $usuario_id]);
     }
 
 
     
 
-    public function registrocita($categoria_id, $nombrecita, $descripcion, $precio, $stock, $oferta, $fecha, $imagen): void {
+    public function registrocita($fecha_hora, $descripcion, $usuario_id, $cliente_id): void {
         $mensaje = 'Regístrate como admin para crear un cita'; // Inicializamos la variable de mensaje
-        
+        $fecha_registro = date('Y-m-d H:i:s');
+
         $usuarioController = new UsuarioController();
         // Verifica si el usuario está autenticado
         if ($usuarioController->sesion_usuario()) {
@@ -82,20 +84,19 @@ class citasController
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
                 // Sanea los datos del cita
-                $nombrecita = Validacion::sanearString($nombrecita);
                 $descripcion = Validacion::sanearString($descripcion);
-                $precio = Validacion::sanearNumero($precio);
-                $stock = Validacion::sanearNumero($stock);
-                $oferta = Validacion::sanearString($oferta);
+                $usuario_id = Validacion::sanearNumero($usuario_id);
+                $cliente_id= Validacion::sanearNumero($cliente_id);
+                
     
                 // Validar campos obligatorios
-                if (empty($nombrecita) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {
+                if (empty($descripcion) || empty($cliente_id) || empty($usuario_id) || empty($fecha_hora)) {
                     $mensaje = "Debe proporcionar todos los campos obligatorios.";
                 } else {
                     // Guardar el nuevo cita
                     
-                    $this->citasService->guardarcita($categoria_id, $nombrecita, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
-                    $mensaje = "cita creado exitosamente.";
+                    $this->citasService->guardarcita($fecha_hora, $descripcion, $usuario_id, $cliente_id, $fecha_registro);
+                    $mensaje = "cita creada exitosamente.";
                 }
             } else {
                 // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes

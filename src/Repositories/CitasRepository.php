@@ -45,18 +45,16 @@
             return $citaCommit;
         }
         
-        public function guardarcita(int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, ?string $imagen): bool {
+        public function guardarcita(string $fecha_hora,string $descripcion,int $usuario_id,int $cliente_id, string $fecha_registro): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO citas (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) 
-                                                        VALUES (:categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen)");
-                $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
-                $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO citas (fecha_hora, descripcion, usuario_id, cliente_id, fecha_registro) 
+                                                        VALUES (:fecha_hora, :descripcion, :usuario_id, :cliente_id, :fecha_registro)");
+                $this->sql->bindParam(':fecha_hora', $fecha_hora, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
-                $this->sql->bindParam(':precio', $precio, PDO::PARAM_STR);
-                $this->sql->bindParam(':stock', $stock, PDO::PARAM_INT);
-                $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
-                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-                $this->sql->bindParam(':imagen', $imagen, PDO::PARAM_STR);
+                $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':cliente_id', $cliente_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':fecha_registro', $fecha_registro, PDO::PARAM_STR);
+
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {

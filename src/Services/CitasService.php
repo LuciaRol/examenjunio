@@ -19,8 +19,8 @@
                                                     
         }
         
-        public function guardarcita(int $categoria_id, string $nombrecita, string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, string $imagen): bool {
-            return $this->citasRepository->guardarcita($categoria_id, $nombrecita, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+        public function guardarcita(string $fecha_hora,string $descripcion,int $usuario_id,int $cliente_id, string $fecha_registro): bool {
+            return $this->citasRepository->guardarcita($fecha_hora, $descripcion, $usuario_id, $cliente_id, $fecha_registro);
         }
         
         public function obtenercitaPorId(int $id): ?array {

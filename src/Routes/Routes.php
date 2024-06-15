@@ -147,6 +147,21 @@
         }
     });
 
+    Router::add('POST', '/nueva_cita', function () {
+        // Verificar si se ha enviado el formulario para crear una nueva cita
+        if (isset($_POST['fecha_hora'], $_POST['descripcion'], $_POST['usuario_id'], $_POST['cliente'])) {
+            // Obtener la información del formulario
+            $fecha_hora = $_POST['fecha_hora'];
+            $descripcion = $_POST['descripcion'];
+            $usuario_id = $_POST['usuario_id'];
+            $cliente_id = $_POST['cliente'];
+    
+            // Llamar a la función para registrar la nueva cita
+            return (new CitasController())->registrocita($fecha_hora, $descripcion, $usuario_id, $cliente_id);
+        }
+    });
+    
+
      /********************* PRODUCTOS  ******************************/
 
 

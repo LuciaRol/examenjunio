@@ -58,8 +58,7 @@
                     <input type="datetime-local" id="fecha_hora" name="fecha_hora" required><br><br>
                     <label for="descripcion">Descripción:</label><br>
                     <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
-                    <label for="usuario_id">ID Usuario:</label><br>
-                    <input type="number" id="usuario_id" name="usuario_id" required><br><br>
+                    <input type="hidden" id="usuario_id" name="usuario_id" value="<?= htmlspecialchars($usuario_id, ENT_QUOTES, 'UTF-8'); ?>">
                     <label for="cliente_id">ID Cliente:</label><br>
                     <select id="cliente" name="cliente" required class="registro-select">
                         <?php foreach ($clientes as $cliente): ?>
@@ -67,7 +66,7 @@
                         <?php endforeach; ?>
                     </select><br><br>
                     
-                    
+                    <input type="submit" value="nueva_cita" class="form-submit">
                 </form>
             </div>
         <!-- <//?php endif; ?> -->
