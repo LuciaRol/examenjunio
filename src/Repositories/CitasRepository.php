@@ -28,7 +28,7 @@
                                                         JOIN usuarios u 
                                                             ON c.usuario_id = u.id
                                                         JOIN clientes_cita cc 
-                                                            ON c.cliente_id = cc.cliente_id;");
+                                                            ON c.cliente_id = cc.id;");
 
 
 

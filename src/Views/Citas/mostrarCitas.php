@@ -49,8 +49,8 @@
 
 
 
-           <!-- Agregar formulario para agregar nueva cita si es administrador -->
-           <?php if ($rol === 'admin'): ?>
+           <!-- Agregar formulario para agregar nueva cita si es administrador <//?php if ($rol === 'admin'): ?> -->
+           
             <div class="registro-container nuevo">
                 <h2 class="registro-form-heading">Crear nueva cita</h2>
                 <form action="<?= BASE_URL ?>nueva_cita" method="POST">
@@ -61,13 +61,16 @@
                     <label for="usuario_id">ID Usuario:</label><br>
                     <input type="number" id="usuario_id" name="usuario_id" required><br><br>
                     <label for="cliente_id">ID Cliente:</label><br>
-                    <input type="number" id="cliente_id" name="cliente_id" required><br><br>
-                    <label for="fecha_registro">Fecha de Registro:</label><br>
-                    <input type="datetime-local" id="fecha_registro" name="fecha_registro" required><br><br>
-                    <input type="submit" value="Crear cita" class="form-submit">
+                    <select id="cliente" name="cliente" required class="registro-select">
+                        <?php foreach ($clientes as $cliente): ?>
+                            <option value="<?php echo htmlspecialchars($cliente->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($cliente->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
+                        <?php endforeach; ?>
+                    </select><br><br>
+                    
+                    
                 </form>
             </div>
-        <?php endif; ?>
+        <!-- <//?php endif; ?> -->
     </main>
 
 

@@ -65,13 +65,13 @@ CREATE TABLE IF NOT EXISTS lineas_pedidos(
 
 DROP TABLE IF EXISTS clientes_cita;
 CREATE TABLE IF NOT EXISTS clientes_cita(
-    cliente_id INT AUTO_INCREMENT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     apellidos VARCHAR(255) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
     usuario_id INT NOT NULL,
-    CONSTRAINT pk_clientes_cita PRIMARY KEY (cliente_id),
+    CONSTRAINT pk_clientes_cita PRIMARY KEY (id),
     CONSTRAINT fk_cliente_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -85,5 +85,5 @@ CREATE TABLE IF NOT EXISTS citas(
     fecha_registro DATETIME NOT NULL,
     CONSTRAINT pk_citas PRIMARY KEY (id),
     CONSTRAINT fk_cita_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    CONSTRAINT fk_cita_cliente FOREIGN KEY (cliente_id) REFERENCES clientes_cita(cliente_id)
+    CONSTRAINT fk_cita_cliente FOREIGN KEY (cliente_id) REFERENCES clientes_cita(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

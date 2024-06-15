@@ -58,9 +58,13 @@ class citasController
             // Verifica si el usuario tiene permisos de administrador
             $rol = $email->getRol();
             }
-       
+          // Se llama a los clientes para poder mostrar el desplegable al crear nuevas citas
+          $clientesController = new clientesController();
+          $clientes = $clientesController->todasClientes();
+        
+
         // Devolver la renderización de la página con los objetos de cita y el correo electrónico de la sesión
-        $this->pagina->render('citas/mostrarcitas', ['citas' => $citasModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje]);
+        $this->pagina->render('citas/mostrarcitas', ['citas' => $citasModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'clientes' =>$clientes]);
     }
 
 
