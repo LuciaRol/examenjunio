@@ -9,9 +9,9 @@
             $this->userRepository = new UsuariosRepository();
         }
        
-        public function register($nombre, $apellidos, $email, $contrasena, $rol): ?string {
+        public function register($nombre, $apellidos, $usuario, $email, $contrasena, $rol): ?string {
             // Llama al método del repositorio para insertar el usuario en la base de datos
-            return $this->userRepository->registro($nombre, $apellidos, $email, $contrasena, $rol);
+            return $this->userRepository->registro($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
         }
 
         //utilizar esta funcion si ciframoscontrasena

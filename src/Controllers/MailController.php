@@ -34,7 +34,8 @@ class MailController {
         $mail->Subject = 'Gracias por registrate en nuestra web';
         // Set HTML 
         $mail->isHTML(TRUE);
-        $mail->Body = '<html>Gracias por registrarte en nuestra web</html>';
+        $mail->Body = '<html>Gracias por registrarte en nuestra web, ' . htmlspecialchars($nombre) . '!<br><br>
+                   con la dirección de correo electrónico: ' . htmlspecialchars($email) . '</html>';
         
         // send the message
         if(!$mail->send()){

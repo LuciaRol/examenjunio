@@ -10,16 +10,16 @@
    use Controllers\ErrorController;
    use Controllers\WebController;
    use Controllers\LoginController;
+   use Controllers\RegistroController;
 
   class Routes{
     public static function index(){
-        /* Bienvenida */ 
-        Router::add('GET','/', function () {
+    /*********************  Bienvenida  ******************************/
+    Router::add('GET','/', function () {
             return (new WebController())->mostrarBienvenida();
           });
     
-        /* Login */
-
+    /*********************  LOGIN  ******************************/
       Router::add('GET','/iniciosesion', function () {
         return (new LoginController())->mostrarLogin();
       });
@@ -45,6 +45,32 @@
     }); 
 
 
+    /*********************  REGISTRO  ******************************/
+
+    Router::add('POST', '/registro_usuario', function () {
+        // Verifica si se ha enviado el formulario de registro
+        if (isset($_POST['registro'])) {
+            // Obtener los datos del formulario
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
+            $usuario = $_POST['usuario'];
+            $email = $_POST['email'];
+            $contrasena = $_POST['contrasena'];
+            
+            
+            // Llamar al controlador y pasar los datos al método registroUsuario
+            $registroController = new RegistroController();
+            $registroController->registroUsuario($nombre, $apellidos, $usuario, $email, $contrasena);
+        }
+    });
+
+    Router::add('GET','/registro', function (){
+        return (new RegistroController())->mostrarRegistro();
+    });
+    
+    
+
+
 
 
         
@@ -60,25 +86,6 @@
 
 
 
-        Router::add('POST', '/registro_usuario', function () {
-            // Verifica si se ha enviado el formulario de registro
-            if (isset($_POST['registro'])) {
-                // Obtener los datos del formulario
-                $nombre = $_POST['nombre'];
-                $apellidos = $_POST['apellidos'];
-                $email = $_POST['email'];
-                $contrasena = $_POST['contrasena'];
-                $rol = 'usur'; // El rol por defecto es usuario
-                
-                // Llamar al controlador y pasar los datos al método registroUsuario
-                $usuariosController = new UsuarioController();
-                $usuariosController->registroUsuario($nombre, $apellidos, $email, $contrasena, $rol);
-            }
-        });
-
-
-        
-        
 
         Router::add('GET','/pedidos', function (){
             return (new PedidosController())->mostrarPedidos();
@@ -96,9 +103,7 @@
             return "ERROR";
         });
 
-        Router::add('GET','/registro', function (){
-            return (new UsuarioController())->mostrarRegistro();
-        });
+        
 
         Router::add('POST', '/edita_perfil', function () {
             // Check if the form for updating the user profile has been submitted

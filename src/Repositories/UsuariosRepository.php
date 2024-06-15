@@ -12,16 +12,17 @@
             $this->conexion = new DataBase();
         }
         
-        public function registro_cifrado($nombre, $apellidos, $email, $contrasena, $rol): ?string {
+        public function registro_cifrado($nombre, $apellidos, $usuario, $email, $contrasena, $rol): ?string {
             try {
-                        // Cifra la contraseña
-                $contrasena_cifrada = password_hash($contrasena, PASSWORD_DEFAULT);
+                // Cifra la contraseña
+                $contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
                 // Prepara y ejecuta la consulta SQL para insertar el usuario en la base de datos
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO usuarios (nombre, apellidos, email, contrasena, rol) VALUES (:nombre, :apellidos, :email, :contrasena, :rol);");
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO usuarios (nombre, apellidos, usuario, email, contrasena, rol) VALUES (:nombre, :apellidos, :usuario, :email, :contrasena, :rol);");
                 $this->sql->bindValue(":nombre", "$nombre", PDO::PARAM_STR);
                 $this->sql->bindValue(":apellidos", $apellidos, PDO::PARAM_STR);
+                $this->sql->bindValue(":usuario", $apellidos, PDO::PARAM_STR);
                 $this->sql->bindValue(":email", $email, PDO::PARAM_STR);
-                $this->sql->bindValue(":contrasena", $contrasena_cifrada, PDO::PARAM_STR); // Guarda la contraseña cifrada
+                $this->sql->bindValue(":contrasena", $contrasena, PDO::PARAM_STR); // Guarda la contraseña cifrada
                 $this->sql->bindValue(":rol", $rol, PDO::PARAM_STR);
                 $this->sql->execute();
                 $this->sql->closeCursor();
@@ -32,14 +33,15 @@
             return $resultado;
         }
         
-        public function registro($nombre, $apellidos, $email, $contrasena, $rol): ?string {
+        public function registro($nombre, $apellidos, $usuario, $email, $contrasena, $rol): ?string {
             try {
-                        // Cifra la contraseña
-                //$contrasena_cifrada = password_hash($contrasena, PASSWORD_DEFAULT);
+                // Cifra la contraseña
+                //$contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
                 // Prepara y ejecuta la consulta SQL para insertar el usuario en la base de datos
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO usuarios (nombre, apellidos, email, contrasena, rol) VALUES (:nombre, :apellidos, :email, :contrasena, :rol);");
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO usuarios (nombre, apellidos, usuario, email, contrasena, rol) VALUES (:nombre, :apellidos, :usuario, :email, :contrasena, :rol);");
                 $this->sql->bindValue(":nombre", "$nombre", PDO::PARAM_STR);
                 $this->sql->bindValue(":apellidos", $apellidos, PDO::PARAM_STR);
+                $this->sql->bindValue(":usuario", $apellidos, PDO::PARAM_STR);
                 $this->sql->bindValue(":email", $email, PDO::PARAM_STR);
                 $this->sql->bindValue(":contrasena", $contrasena, PDO::PARAM_STR); // Guarda la contraseña cifrada
                 $this->sql->bindValue(":rol", $rol, PDO::PARAM_STR);

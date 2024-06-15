@@ -33,7 +33,7 @@
                 </form>
             <?php else: ?>
                 <form action="<?= BASE_URL ?>login" method="POST">
-                    <input class="login_user" type="text" name="email" placeholder="Usuario/Email" required>
+                    <input class="login_user" type="text" name="email" placeholder="Email" required>
                     <input class="login_pass" type="password" name="password" placeholder="Contraseña" required>
                     <button class="login_btn" type="submit">Iniciar sesión</button>
                     <?php if (isset($loginError)): ?>
