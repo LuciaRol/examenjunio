@@ -12,6 +12,7 @@
             <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
             <a class="nav_link" href="<?= BASE_URL ?>carrito">Carrito</a>
+            <a class="nav_link" href="<?= BASE_URL ?>citas">Citas</a>
             <a class="nav_link" href="<?= BASE_URL ?>iniciosesion">Login</a>
             <a class="nav_link" href="<?= BASE_URL ?>registro">Registro</a>
             <a class="nav_link" href="<?= BASE_URL ?>api_producto">API</a>

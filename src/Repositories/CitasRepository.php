@@ -3,46 +3,51 @@
     use Lib\DataBase;
     use Models\Blog;
     use Models\Validacion;
-    use Models\Producto;
+    use Models\cita;
     use PDOException;
     use PDO;
-    class productosRepository{
+    class citasRepository{
         private DataBase $conexion;
         private mixed $sql;
         function __construct(){
             $this->conexion = new DataBase();
         }
         public function findAll():array|string|null {
-            $productoCommit = null;
+            $citaCommit = null;
             try {
-                $this->sql = $this->conexion->prepareSQL("SELECT    a.id, 
-                                                                    a.categoria_id, 
-                                                                    a.nombre, 
-                                                                    a.descripcion, 
-                                                                    a.precio, 
-                                                                    a.stock, 
-                                                                    a.oferta, 
-                                                                    a.fecha, 
-                                                                    a.imagen, 
-                                                                    b.nombre as 'categoria' 
-                                                        FROM productos a 
-                                                        inner join categorias b on a.categoria_id = b.id");
+                $this->sql = $this->conexion->prepareSQL("
+                                                        SELECT  c.cita_id, 
+                                                                c.fecha_hora, 
+                                                                c.descripcion, 
+                                                                c.usuario_id,
+                                                                c.cliente_id,
+                                                                c.fecha_registro,
+                                                                u.nombre AS nombre_usuario, 
+                                                                cc.nombre AS nombre_cliente
+                                                        FROM citas c
+                                                        JOIN usuarios u 
+                                                            ON c.usuario_id = u.id
+                                                        JOIN clientes_cita cc 
+                                                            ON c.cliente_id = cc.cliente_id;");
+
+
+
                 
                 $this->sql->execute();
-                $productoCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $citaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
                 $this->sql->closeCursor();
-                $productoCommit = $productoCommitData ?: null;
+                $citaCommit = $citaCommitData ?: null;
                 
             } catch (PDOException $e) {
-                $productoCommit = $e->getMessage();
+                $citaCommit = $e->getMessage();
             }
         
-            return $productoCommit;
+            return $citaCommit;
         }
         
-        public function guardarProducto(int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, ?string $imagen): bool {
+        public function guardarcita(int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, ?string $imagen): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) 
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO citas (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) 
                                                         VALUES (:categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen)");
                 $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
@@ -58,9 +63,9 @@
                 return false;
             }
         }
-        public function editarProducto(int $productoId, int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha): bool {
+        public function editarcita(int $citaId, int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("UPDATE productos SET 
+                $this->sql = $this->conexion->prepareSQL("UPDATE citas SET 
                                                             categoria_id = :categoria_id, 
                                                             nombre = :nombre, 
                                                             descripcion = :descripcion, 
@@ -68,7 +73,7 @@
                                                             stock = :stock, 
                                                             oferta = :oferta, 
                                                             fecha = :fecha
-                                                        WHERE id = :productoId");
+                                                        WHERE id = :citaId");
                 $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
@@ -77,7 +82,7 @@
                 $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
                 $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
                 
-                $this->sql->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+                $this->sql->bindParam(':citaId', $citaId, PDO::PARAM_INT);
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {
@@ -85,15 +90,15 @@
             }
         }
         
-        public function bajarStockProductos(int $productoId, int $unidades): bool {
+        public function bajarStockcitas(int $citaId, int $unidades): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("
-                                                            UPDATE productos SET 
+                                                            UPDATE citas SET 
                                                                 stock = stock - :unidades 
-                                                            WHERE id = :productoId
+                                                            WHERE id = :citaId
                                                         ");
                 $this->sql->bindParam(':unidades', $unidades, PDO::PARAM_INT);
-                $this->sql->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+                $this->sql->bindParam(':citaId', $citaId, PDO::PARAM_INT);
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {
@@ -104,12 +109,12 @@
 
         public function findById(int $id): ?array {
             try {
-                $this->sql = $this->conexion->prepareSQL("SELECT * FROM productos WHERE id = :id");
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM citas WHERE id = :id");
                 $this->sql->bindParam(':id', $id, PDO::PARAM_INT);
                 $this->sql->execute();
-                $producto = $this->sql->fetch(PDO::FETCH_ASSOC);
+                $cita = $this->sql->fetch(PDO::FETCH_ASSOC);
                 $this->sql->closeCursor();
-                return $producto ?: null;
+                return $cita ?: null;
             } catch (PDOException $e) {
                 return null;
             }
@@ -117,7 +122,7 @@
     
         public function updateStock(int $id, int $nuevoStock): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("UPDATE productos SET stock = :stock WHERE id = :id");
+                $this->sql = $this->conexion->prepareSQL("UPDATE citas SET stock = :stock WHERE id = :id");
                 $this->sql->bindParam(':stock', $nuevoStock, PDO::PARAM_INT);
                 $this->sql->bindParam(':id', $id, PDO::PARAM_INT);
                 $this->sql->execute();
@@ -126,13 +131,13 @@
                 return false;
             }
         }
-        public function eliminarProducto(int $id): bool {
+        public function eliminarcita(int $id): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("DELETE FROM productos WHERE id = :id");
+                $this->sql = $this->conexion->prepareSQL("DELETE FROM citas WHERE id = :id");
                 $this->sql->bindParam(':id', $id, PDO::PARAM_INT);
                 $this->sql->execute();
                 
-                // Verificar si se eliminó correctamente el producto
+                // Verificar si se eliminó correctamente el cita
                 return true;
                 
             } catch (PDOException $e) {
@@ -143,8 +148,8 @@
 
         
         
-        public function buscarProductos($descripcion):array|string|null {
-            $productoCommit = null;
+        public function buscarcitas($descripcion):array|string|null {
+            $citaCommit = null;
             try {
 
                 $descripcion = strtolower($descripcion);
@@ -159,19 +164,19 @@
                                                             a.fecha, 
                                                             a.imagen, 
                                                             b.nombre as 'categoria' 
-                                                    FROM productos a inner join categorias b on a.categoria_id = b.id
+                                                    FROM citas a inner join categorias b on a.categoria_id = b.id
                                                     where LOWER(a.descripcion) like :descripcion or LOWER(a.nombre) like :descripcion or LOWER(b.nombre) like :descripcion");
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
                 $this->sql->execute();
-                $productoCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $citaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
                 $this->sql->closeCursor();
-                $productoCommit = $productoCommitData ?: null;
+                $citaCommit = $citaCommitData ?: null;
                 
             } catch (PDOException $e) {
-                $productoCommit = $e->getMessage();
+                $citaCommit = $e->getMessage();
             }
         
-            return $productoCommit;
+            return $citaCommit;
         }
         
         

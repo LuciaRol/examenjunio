@@ -12,6 +12,7 @@
    use Controllers\LoginController;
    use Controllers\RegistroController;
    use Controllers\ProductosAPIController;
+   use Controllers\CitasController;
    use Services\ProductosService;
 
   class Routes{
@@ -26,7 +27,6 @@
         return (new LoginController())->mostrarLogin();
       });
 
-
       Router::add('POST', '/login', function () {
         // Verificar si se ha enviado el formulario de inicio de sesión
         if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -40,7 +40,6 @@
             $LoginController->login($email, $password);
         }
     });
-
       
     Router::add('POST','/logout', function (){
         return (new LoginController())->logout();
@@ -129,7 +128,15 @@
         }
     });
 
-     /********************* CATEGORIAS  ******************************/
+
+    /********************* CITAS  ******************************/
+
+
+    Router::add('GET','/citas', function (){
+        return (new CitasController())->mostrarCitas();
+    });
+
+     /********************* PRODUCTOS  ******************************/
 
 
     Router::add('GET','/productos', function (){
