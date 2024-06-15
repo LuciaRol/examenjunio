@@ -13,6 +13,8 @@
    use Controllers\RegistroController;
    use Controllers\ProductosAPIController;
    use Controllers\CitasController;
+   use Controllers\ClientesController;
+
    use Services\ProductosService;
 
   class Routes{
@@ -184,9 +186,38 @@
         }
     });
     
+    /********************* CLIENTES CITA  ******************************/
+
+    Router::add('GET','/clientes', function () {
+        return (new clientesController())->mostrarTodos();
+    });
+
+    Router::add('POST', '/registro_cliente', function () {
+        // Verificar si se ha enviado el formulario para registrar un nuevo cliente
+        if (isset($_POST['nombre_cliente'], $_POST['apellidos_cliente'], $_POST['telefono_cliente'], $_POST['email_cliente'], $_POST['usuario_id'])) {
+            // Obtener los datos del formulario
+            $nombreCliente = $_POST['nombre_cliente'];
+            $apellidosCliente = $_POST['apellidos_cliente'];
+            $telefonoCliente = $_POST['telefono_cliente'];
+            $emailCliente = $_POST['email_cliente'];
+            $usuario_id = $_POST['usuario_id'];
+            
+            // Crear una instancia del controlador de clientes
+            $clientesController = new ClientesController();
+            
+            // Llamar al método para registrar un nuevo cliente del controlador de clientes
+            $clientesController->registroCliente($nombreCliente, $apellidosCliente, $telefonoCliente, $emailCliente, $usuario_id);
+        } else {
+            // Enviar una respuesta de error si faltan datos en el formulario
+            http_response_code(400); // Bad Request
+            echo "Error: Faltan datos en el formulario de registro de cliente.";
+            exit();
+        }
+    });
     
 
-     /********************* PRODUCTOS  ******************************/
+
+    /********************* PRODUCTOS  ******************************/
 
 
     Router::add('GET','/productos', function (){

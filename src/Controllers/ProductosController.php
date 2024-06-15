@@ -28,7 +28,8 @@ class ProductosController
     {
         // Obtener todos los productos
         $productos = $this->productosService->obtenerProductos();
-
+        // Verificar si $productos es un array, si no lo es, crear un array vacío
+        $productos = is_array($productos) ? $productos : [];
         // Crear un array para almacenar los objetos de producto
         $productosModel = [];
         foreach ($productos as $producto) {
@@ -175,9 +176,12 @@ public function buscarProductos($terminoBusqueda): void
 
         // Llamar al servicio de productos para buscar productos
         $productos = $this->productosService->buscarProductos($terminoBusqueda);
+        // Verificar si $productos es un array, si no lo es, crear un array vacío
+        $productos = is_array($productos) ? $productos : [];
 
         // Crear un array para almacenar los objetos de producto
         $productosModel = [];
+        
         foreach ($productos as $producto) {
             $productoModel = new Producto(
                 $producto['id'],

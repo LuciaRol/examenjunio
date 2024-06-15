@@ -78,7 +78,7 @@ class CategoriasController {
             
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
-                $nombreCategoria = Validacion::sanearCategoria($nombreCategoria);
+                $nombreCategoria = Validacion::saneamientoString($nombreCategoria);
                 
 
                 if (empty($nombreCategoria)) {

@@ -38,14 +38,16 @@ class ClientesController {
             $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
             
             // Verifica si el usuario tiene permisos de administrador
-            $rol = $email->getRol(); }
+            $rol = $email->getRol();
+            $usuario_id = $email->getId(); }
 
         // Devolver la renderización de la página con los objetos de categoría, el correo electrónico de la sesión y el mensaje
         $this->pagina->render('Clientes/mostrarClientes', [
             'Clientes' => $ClientesModel, 
             'emailSesion' => $emailSesion, 
             'mensaje' => $mensaje,
-            'rol' => $rol
+            'rol' => $rol,
+            'usuario_id' => $usuario_id
         ]);
     }
 
@@ -60,14 +62,19 @@ class ClientesController {
             $ClienteModel = new Cliente();
             $ClienteModel->setId($Cliente['id']);
             $ClienteModel->setNombre($Cliente['nombre']);
+            $ClienteModel->setApellidos($Cliente['apellidos']);
+            $ClienteModel->setTelefono($Cliente['telefono']);
+            $ClienteModel->setEmail($Cliente['email']);
+            $ClienteModel->setUsuarioId($Cliente['usuario_id']);
+
             // Agregar la instancia de Cliente al array
             $ClientesModel[] = $ClienteModel;
         }
         return $ClientesModel;
     }
 
-    /*public function registroCliente($nombreCliente):void {
-        $mensaje = 'Regístrate como admin para crear la categoría'; // Inicializamos la variable de mensaje
+    public function registroCliente($nombreCliente, $apellidosCliente, $telefonoCliente, $emailCliente, $usuario_id):void {
+        $mensaje = 'Regístrate como admin para crear el cliente'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
@@ -78,25 +85,34 @@ class ClientesController {
             
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
-                $nombreCliente = Validacion::sanearCliente($nombreCliente);
-                
-
-                if (empty($nombreCliente)) {
+                $nombreCliente = Validacion::saneamientoString($nombreCliente);
+                $apellidosCliente = Validacion::saneamientoString($apellidosCliente);
+                $telefonoCliente = Validacion::saneartelefono($telefonoCliente);
+                $usuario_id = Validacion::sanearNumero($usuario_id);
+                if (empty($nombreCliente) || empty($apellidosCliente) || empty($telefonoCliente) || empty($usuario_id) || empty($emailCliente)) {
+             
                     // Si el nombre de la categoría está vacío, asignar un mensaje de error
-                    $mensaje = "Debe proporcionar un nombre para la nueva categoría.";
+                    $mensaje = "Debe proporcionar todos los campos para el nuevo cliente de forma correcta. Revisa de introducir solo los campos correctos para el teléfono (números con los iconos de + y separadores -)";
                 } else {
                     // Guardar la nueva categoría si no está vacía
-                    $this->ClientesService->guardarCliente($nombreCliente);
-                    $mensaje = "Categoría creada exitosamente.";
+                     // Intentar guardar el cliente
+                    $guardadoExitoso = $this->ClientesService->guardarCliente($nombreCliente, $apellidosCliente, $telefonoCliente, $emailCliente, $usuario_id);
+
+                    // Verificar el resultado y establecer el mensaje correspondiente
+                    if ($guardadoExitoso) {
+                        $mensaje = "Cliente creado exitosamente.";
+                    } else {
+                        $mensaje = "Error al crear el cliente. Por favor, inténtelo de nuevo.";
+                    }
                 }
             } else {
                 // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes
-                $mensaje = "No tienes permisos de administrador para registrar nuevas categorías.";
+                $mensaje = "No tienes permisos de administrador para registrar nuevos clientes.";
             }
         }
         
         $this-> mostrarTodos($email, $mensaje);
     }
 
-*/
+
 }

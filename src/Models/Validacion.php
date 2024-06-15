@@ -111,6 +111,29 @@ class Validacion {
             return null;
         }
     }
+
+    public static function sanearTelefono(string $telefono): string {
+        // Filtrar solo números, + y -, eliminando otros caracteres
+        $telefonoLimpio = preg_replace('/[^0-9+\-]+/', '', $telefono);
+    
+        // Verificar longitud y ajustar si es necesario
+        $longitudMinima = 9;
+        $longitudMaximaConMas = 12;
+        
+        // Verificar si hay un signo + al principio
+        $tieneMas = strpos($telefonoLimpio, '+') === 0;
+    
+        // Ajustar la longitud máxima según la presencia del signo +
+        $longitudMaxima = $tieneMas ? $longitudMaximaConMas : $longitudMinima;
+    
+        // Recortar o ajustar la longitud del teléfono si es mayor a la máxima permitida
+        if (strlen($telefonoLimpio) > $longitudMaxima) {
+            $telefonoLimpio = substr($telefonoLimpio, 0, $longitudMaxima);
+        }
+    
+        return $telefonoLimpio;
+    }
+    
     
     public static function sanearNumero($numero): float{
         // Sanear el importe: eliminar todos los caracteres excepto los dígitos y el signo de puntuación para permitir números decimales
@@ -156,10 +179,12 @@ class Validacion {
     }
 
       // Nueva función para sanear nombre de la categoría
-      public static function sanearCategoria($nombreCategoria): string {
+      public static function saneamientoString($nombreCategoria): string {
         // Aplicar trim para eliminar espacios en blanco al inicio y al final
         $nombreCategoria = trim($nombreCategoria);
         // Sanear el nombre de la categoría
         return self::sanearString($nombreCategoria);
     }
+
+    
 }
