@@ -61,25 +61,19 @@
                 return false;
             }
         }
-        public function editarcita(int $citaId, int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha): bool {
+
+        public function editarcita(int $citaId, string $fecha_hora, string $descripcion, int $usuario_id, int $cliente_id): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("UPDATE citas SET 
-                                                            categoria_id = :categoria_id, 
-                                                            nombre = :nombre, 
+                                                            fecha_hora = :fecha_hora, 
                                                             descripcion = :descripcion, 
-                                                            precio = :precio, 
-                                                            stock = :stock, 
-                                                            oferta = :oferta, 
-                                                            fecha = :fecha
+                                                            usuario_id = :usuario_id, 
+                                                            cliente_id = :cliente_id
                                                         WHERE id = :citaId");
-                $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
-                $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $this->sql->bindParam(':fecha_hora', $fecha_hora, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
-                $this->sql->bindParam(':precio', $precio, PDO::PARAM_STR);
-                $this->sql->bindParam(':stock', $stock, PDO::PARAM_INT);
-                $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
-                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-                
+                $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':cliente_id', $cliente_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':citaId', $citaId, PDO::PARAM_INT);
                 $this->sql->execute();
                 return true;

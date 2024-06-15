@@ -38,9 +38,9 @@
         public function buscarcitas(string $terminoBusqueda): ?array {
             return $this->citasRepository->buscarcitas($terminoBusqueda);
         }
-
-        public function editarcita(int $citaId, int $categoria_id, string $nombrecita, string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha): bool {
-            return $this->citasRepository->editarcita($citaId, $categoria_id, $nombrecita, $descripcion, $precio, $stock, $oferta, $fecha);
+        public function editarcita(int $citaId, string $fecha_hora, string $descripcion, int $usuario_id, int $cliente_id): bool {
+            return $this->citasRepository->editarcita($citaId, $fecha_hora, $descripcion, $usuario_id, $cliente_id
+        );
         }
         
     }

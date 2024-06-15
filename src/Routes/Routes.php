@@ -160,6 +160,30 @@
             return (new CitasController())->registrocita($fecha_hora, $descripcion, $usuario_id, $cliente_id);
         }
     });
+
+    Router::add('POST', '/editar_cita', function () {
+        // Verificar si se ha enviado el formulario para editar una cita
+        if (isset($_POST['cita_id'], $_POST['fecha_hora'], $_POST['descripcion'], $_POST['usuario_id'], $_POST['cliente_id'])) {
+            // Obtener la información del formulario
+            $citaId = $_POST['cita_id'];
+            $fecha_hora = $_POST['fecha_hora'];
+            $descripcion = $_POST['descripcion'];
+            $usuario_id = $_POST['usuario_id'];
+            $cliente_id = $_POST['cliente_id'];
+            
+            // Validar los datos antes de continuar
+            // Aquí deberías incluir validaciones adicionales según tus requisitos
+    
+            // Llamar a la función para editar la cita
+            return (new CitasController())->editarCita($citaId, $fecha_hora, $descripcion, $usuario_id, $cliente_id);
+        } else {
+            // Enviar una respuesta de error si faltan datos en el formulario
+            http_response_code(400); // Bad Request
+            echo "Error: Faltan datos en el formulario de edición de cita.";
+            exit();
+        }
+    });
+    
     
 
      /********************* PRODUCTOS  ******************************/

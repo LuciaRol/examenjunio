@@ -107,7 +107,7 @@ class citasController
         $this->mostrarcitas($email, $mensaje);
     }
 
-    public function editarcita($citaId, $categoria_id, $nombrecita, $descripcion, $precio, $stock, $oferta, $fecha): void {
+    public function editarcita($citaId, $fecha_hora, $descripcion, $usuario_id, $cliente_id): void {
         $mensaje = 'Regístrate como admin para editar un cita'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -119,19 +119,17 @@ class citasController
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
                 // Sanea los datos del cita
-                $nombrecita = Validacion::sanearString($nombrecita);
                 $descripcion = Validacion::sanearString($descripcion);
-                $precio = Validacion::sanearNumero($precio);
-                $stock = Validacion::sanearNumero($stock);
-                $oferta = Validacion::sanearString($oferta);
+                $precio = Validacion::sanearNumero($usuario_id);
+                $stock = Validacion::sanearNumero($cliente_id);
     
                 // Validar campos obligatorios
-                if (empty($nombrecita) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {
+                if (empty($descripcion) || empty($fecha_hora) || empty($usuario_id) || empty($cliente_id)) {
                     $mensaje = "Debe proporcionar todos los campos obligatorios.";
                 } else {
                     // Editar el cita existente
                     
-                    $this->citasService->editarcita($citaId, $categoria_id, $nombrecita, $descripcion, $precio, $stock, $oferta, $fecha);
+                    $this->citasService->editarcita($citaId, $fecha_hora, $descripcion, $usuario_id, $cliente_id);
                     $mensaje = "cita actualizado exitosamente.";
                 }
             } else {
