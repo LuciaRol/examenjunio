@@ -21,7 +21,9 @@ class ProductosAPIController
     }
 
     public function mostrarProductosAPI()
+
     {
+        // si quiero cambiar la api, hay que cambiar el servicio para que llame a la tabla correcta
         // Obtener todos los productos
         $productos = $this->productosService->obtenerProductos();
 
