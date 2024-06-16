@@ -15,7 +15,6 @@ class LoginController {
     {
         // Crea una nueva instancia de Pages
         $this->pagina = new Pages();
-        // Crea una instancia del servicio de categorías
         
         $this->usuariosService = new UsuariosService();
 
@@ -42,6 +41,8 @@ class LoginController {
         $error = ''; // Creamos esta variable para que si todo va bien, no de error al mostrarBlog
     
         if ($email && $password) {
+            // Si contraeña cifrada, se pone esto:
+            // $user = $this->usuariosService->verificaCredencialescontrasenacifrada($email, $password);
             $user = $this->usuariosService->verificaCredenciales($email, $password);
             if ($user) {
                 session_start();

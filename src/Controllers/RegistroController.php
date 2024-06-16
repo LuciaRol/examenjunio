@@ -29,7 +29,7 @@ class RegistroController {
 
         $usuarioController = new UsuarioController();
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-        $rol = 'docente';
+        $rol = 'usur';
         if ($usuarioController->sesion_usuario()) {
             // Obtén el usuario actual
             $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);

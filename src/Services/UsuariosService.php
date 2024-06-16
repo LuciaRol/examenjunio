@@ -11,6 +11,8 @@
        
         public function register($nombre, $apellidos, $usuario, $email, $contrasena, $rol): ?string {
             // Llama al método del repositorio para insertar el usuario en la base de datos
+            // Si la contraseña tiene que ser cifrada poner la siguiente línea por la otra:
+            // return $this->userRepository->registro_cifrado($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
             return $this->userRepository->registro($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
         }
 

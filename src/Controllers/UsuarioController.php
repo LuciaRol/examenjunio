@@ -174,13 +174,22 @@ class UsuarioController {
         }
 
         if ($rol === 'admin'){
-            $usuario = $this->usuariosService->borrarUsuario($usuario_id);
-            
-            $mensaje = "Usuario borrado correctamente";
+            $guardadoExitoso = $this->usuariosService->borrarUsuario($usuario_id);
+            // Verificar el resultado y establecer el mensaje correspondiente
+        if ($guardadoExitoso) {
+            $mensaje = "Borrado de usuario exitoso.";
+        } else {
+            $mensaje = "Error al crear al borrar el usuario. Tiene algún pedido o cita establecida y por eso no se puede ni se debe borrar del sistema.";
+            // No se debe borrar del sistema este tipo de usuarios porque tenemos que guardar un registro de los pedidos que se han realizado, ya sean de productos, o usuarios.
+            // La bbdd no tiene ningún sentido si se pueden borrar este tipo de cosas.
+
+        }
+       
         } else {
             $mensaje = "Tienes que tener permisos de administrador para poder borrar un usuario";
             
-    }
+        }      
+
     $this->mostrarUsuario($mensaje);
 
     }
