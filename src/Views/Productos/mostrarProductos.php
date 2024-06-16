@@ -1,8 +1,16 @@
-<body>
-    <main>
-        <h2>Lista de productos</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de productos</title>
+    <link rel="stylesheet" href="path/to/your/styles.css">
+</head>
+<body class="productos-body">
+    <main class="productos-main">
+        <h2 class="productos-heading">Lista de productos</h2>
         <?php if (!empty($mensaje)): ?>
-            <p class="mensaje"><?php echo $mensaje; ?></p>
+            <p class="productos-mensaje"><?php echo $mensaje; ?></p>
         <?php endif; ?>
         <?php if (!empty($productos)): ?>
             <table class="productos-table">
@@ -25,28 +33,28 @@
                         <tr id="producto-<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
                             <td><?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?></td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getNombre_categoria(), ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getNombre_categoria(), ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getPrecio(), ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getPrecio(), ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getStock(), ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getStock(), ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <span class="texto"><?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="productos-texto"><?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                                <img class="productos-img" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                             </td>
                             <td>
                                 <!-- Formulario para agregar al carrito -->
@@ -73,49 +81,49 @@
     
         <!-- formulario para agregar nuevos productos -->
         <?php if ($rol === 'admin'): ?>
-            <div class="registro-container nuevo">
-                <h2 class="registro-form-heading">Crear nuevo producto</h2>
-                <div class="registro-form">
+            <div class="productos-nuevo">
+                <h2 class="productos-registro-form-heading">Crear nuevo producto</h2>
+                <div class="productos-registro-form">
                 
-                <form action="<?= BASE_URL ?>nuevo_producto" method="POST" class="registro-formulario"> 
+                <form action="<?= BASE_URL ?>nuevo_producto" method="POST" class="productos-registro-formulario"> 
                     <label for="nuevo_producto">Nombre del Producto:</label><br>
-                    <input type="text" id="nuevo_producto" name="nuevo_producto" required class="registro-input"><br><br> 
+                    <input type="text" id="nuevo_producto" name="nuevo_producto" required class="productos-registro-input"><br><br> 
                     <label for="categoria">Categoría:</label><br>
-                    <select id="categoria" name="categoria" required class="registro-select">
+                    <select id="categoria" name="categoria" required class="productos-registro-select">
                         <?php foreach ($categorias as $categoria): ?>
                             <option value="<?php echo htmlspecialchars($categoria->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
                         <?php endforeach; ?>
                     </select><br><br>
                     <label for="descripcion">Descripción:</label><br>
-                    <textarea id="descripcion" name="descripcion" rows="4" cols="50" class="registro-textarea"></textarea><br><br>
+                    <textarea id="descripcion" name="descripcion" rows="4" cols="50" class="productos-registro-textarea"></textarea><br><br>
 
                     <label for="precio">Precio:</label><br>
-                    <input type="number" id="precio" name="precio" step="0.01" required class="registro-input"><br><br>
+                    <input type="number" id="precio" name="precio" step="0.01" required class="productos-registro-input"><br><br>
 
                     <label for="stock">Stock:</label><br>
-                    <input type="number" id="stock" name="stock" required class="registro-input"><br><br>
+                    <input type="number" id="stock" name="stock" required class="productos-registro-input"><br><br>
 
                     <label for="oferta">Oferta (opcional, máximo 2 caracteres):</label><br>
-                    <input type="text" id="oferta" name="oferta" maxlength="2" class="registro-input"><br><br>
+                    <input type="text" id="oferta" name="oferta" maxlength="2" class="productos-registro-input"><br><br>
 
                     <label for="fecha">Fecha:</label><br>
-                    <input type="date" id="fecha" name="fecha" required class="registro-input"><br><br>
+                    <input type="date" id="fecha" name="fecha" required class="productos-registro-input"><br><br>
 
                     <label for="imagen">Imagen:</label><br>
-                    <select id="imagen" name="imagen" required class="registro-select">
+                    <select id="imagen" name="imagen" required class="productos-registro-select">
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <option value="imagen<?php echo $i; ?>.jpg">Imagen<?php echo $i; ?></option>
                         <?php endfor; ?>
                     </select><br><br>
 
-                    <input type="submit" value="Crear producto" class="registro-button form-submit"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
+                    <input type="submit" value="Crear producto" class="productos-registro-button form-submit"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
                 </form>
             </div>
         </div>
 
         <?php endif; ?>
         <?php if ($rol === 'admin'): ?>
-             <h2 class="editar-titulo">Editar productos ya existentes</h2>
+             <h2 class="productos-editar-titulo">Editar productos ya existentes</h2>
         <table class="productos-table">
             <thead>
                 <tr>
@@ -148,7 +156,7 @@
                             <td><input type="text" name="oferta" maxlength="2" value="<?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td><input type="date" name="fecha" value="<?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td>
-                                <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                                <img class="productos-img" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                             </td>
                             <td>
                                 <button type="submit" class="form-submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->

@@ -6,10 +6,10 @@
 
 :root {
 	--primary: #fff;
-	--primary-light: #e59d48;
-	--secondary: #40e0d0;
+	--secondary: #e59d48;
+	--tertiary: #40e0d0;
 	--contrast: #92c9d2;
-    --contrat-hover: #044465;
+    --contrast-hover: #044465;
 	--text: #000; 
 	--text-title: #fff;
 	--font: Arial, Helvetica, sans-serif;
@@ -71,7 +71,7 @@ header .header_second_div{
 	padding: 0.5rem;
 	align-items: center;
 	justify-content: space-between;
-	background-color: var(--primary-light);
+	background-color: var(--secondary);
 	color: var(--text-title);
 }
 
@@ -100,12 +100,12 @@ header .login_btn{
 }
 
 header .login_btn:focus{
-	outline: 2px solid var(--secondary);
+	outline: 2px solid var(--tertiary);
 	border-radius: 2px;
 }
 
 header .login_btn:hover{
-	background-color: var(--contrat-hover);
+	background-color: var(--contrast-hover);
 	border: 1px solid gainsboro;
 	color: var(--text-title);
 }
@@ -116,7 +116,7 @@ footer {
 	bottom: 0;
 	width: 100%;
 	text-align: center;
-	border-top: 2px solid var(--primary-light);
+	border-top: 2px solid var(--secondary);
 	padding: 10px 0;
 	margin-top: 10px;
 }
@@ -131,7 +131,7 @@ footer {
 
 .card {
     width: 100%; 
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
 }
 
@@ -168,7 +168,7 @@ footer {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid var(--contrat-hover);
+    border: 2px solid var(--contrast-hover);
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -184,7 +184,7 @@ footer {
 }
 
 .form-submit:hover {
-    background-color: var(--contrat-hover);
+    background-color: var(--contrast-hover);
     color: var(--text-title);
    
     
@@ -194,7 +194,7 @@ footer {
 .message {
     padding: 20px;
     margin-top: 20px;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
     background-color: #f9f9f9;
     text-align: center;
@@ -242,7 +242,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
     width: 300px; 
     margin: 0 auto; 
@@ -275,7 +275,7 @@ h2 {
 
 .user-card {
     width: 100%; /* Ajusta el ancho de las tarjetas al ancho del contenedor */
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -304,7 +304,7 @@ h2 {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -320,7 +320,7 @@ h2 {
 }
 
 .user-form-submit:hover {
-    background-color: var(--contrat-hover);
+    background-color: var(--contrast-hover);
     color: var(--text-title);
 }
 
@@ -340,12 +340,12 @@ h2 {
 
 .user-table th, .user-table td {
     padding: 10px;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     text-align: left;
 }
 
 .user-table th {
-    background-color: var(--primary-light);
+    background-color: var(--secondary);
     color: white;
 }
 
@@ -356,41 +356,6 @@ h2 {
 .user-table tbody tr:nth-child(even) {
     background-color: #e9e9e9;
 }
-
-
-/* PRODUCTOS */
-
-.productos-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-.productos-table th,
-.productos-table td {
-    border: 1px solid var(--primary-light);
-    padding: 8px;
-    text-align: left;
-}
-
-.productos-table th {
-    background-color: var(--primary-light);
-    color: var(--text-title);
-}
-
-.productos-table td {
-    background-color: var(--primary);
-    color: var(--text);
-}
-
-.img_zapato{
-	max-width: 70px;
-}
-
-/* .editar-titulo{
-	margin-top: 1rem;
-} */
-
 
 
 
@@ -404,7 +369,7 @@ h2 {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
     background-color: var(--primary);
 }
@@ -435,9 +400,9 @@ h2 {
 }
 
 .registro-form button:hover {
-    background-color: var(--contrat-hover);
+    background-color: var(--contrast-hover);
 	color: var(--text-title);
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
 	border:none;
 }
 
@@ -448,7 +413,7 @@ h2 {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
 }
 
@@ -461,10 +426,312 @@ h2 {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--secondary);
     border-radius: 5px;
     box-sizing: border-box;
 }
+
+/* LOGIN */
+.login-container {
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    background-color: var(--primary);
+}
+
+.login-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-title);
+}
+
+.login-form-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--contrast);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-form-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--contrast);
+    color: var(--text);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-form-btn:hover {
+    background-color: var(--contrast-hover);
+    color: var(--text-title);
+}
+
+.login-form-error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* CITAS */
+/* Estilos generales */
+
+
+h2 {
+    color: #444;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* CITAS */
+
+.citas-body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+}
+
+.citas-main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #e6f7ff;
+}
+
+.citas-heading, .citas-mensaje, .citas-no-citas {
+    color: #005073;
+}
+
+.citas-table th {
+    background-color: #b3daff;
+}
+
+.citas-table td {
+    background-color: #cceeff;
+}
+
+.citas-nuevo, .citas-registro-form {
+    background-color: #d9f2ff;
+    padding: 20px;
+    border: 1px solid #99c2ff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.citas-registro-form-heading, .citas-editar-titulo {
+    color: #004466;
+}
+
+.citas-registro-form input, .citas-registro-form textarea, .citas-registro-form select, .citas-registro-button {
+    border: 1px solid #99c2ff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: calc(100% - 22px);
+}
+
+.citas-registro-button {
+    background-color: #005073;
+    color: white;
+    cursor: pointer;
+    width: auto;
+}
+
+.citas-img {
+    max-width: 100px;
+    border-radius: 4px;
+}
+
+/*  PRODUCTOS */
+
+.productos-body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #fff8f0;
+}
+
+.productos-main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffefe6;
+}
+
+.productos-heading, .productos-mensaje, .productos-no-productos {
+    color: #734f00;
+}
+
+.productos-table th {
+    background-color: #ffd9b3;
+}
+
+.productos-table td {
+    background-color: #ffe6cc;
+}
+
+.productos-nuevo, .productos-registro-form {
+    background-color: #ffefd9;
+    padding: 20px;
+    border: 1px solid #ffcc99;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.productos-registro-form-heading, .productos-editar-titulo {
+    color: #664400;
+}
+
+.productos-registro-form input, .productos-registro-form textarea, .productos-registro-form select, .productos-registro-button {
+    border: 1px solid #ffcc99;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: calc(100% - 22px);
+}
+
+.productos-registro-button {
+    background-color: #734f00;
+    color: white;
+    cursor: pointer;
+    width: auto;
+}
+
+.productos-img {
+    max-width: 100px;
+    border-radius: 4px;
+}
+
+/* NUEVO CLIENTE */
+
+.cliente-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cliente-card {
+    background-color: var(--primary);
+    padding: 20px;
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.cliente-card-h2 {
+    color: var(--text-title);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cliente-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.cliente-form-label {
+    margin-bottom: 5px;
+}
+
+.cliente-form-input {
+    padding: 10px;
+    border: 1px solid var(--contrast);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    width: calc(100% - 22px);
+    color: var(--text);
+    font-family: var(--font);
+}
+
+.cliente-form-submit {
+    background-color: var(--contrast);
+    color: var(--text);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cliente-form-submit:hover {
+    background-color: var(--contrast-hover);
+    color: var(--text-title);
+}
+
+/* Estilos para la tabla de clientes */
+.clientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.clientes-table th,
+.clientes-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--contrast);
+    color: var(--text);
+}
+
+.clientes-table th {
+    background-color: var(--secondary);
+    color: var(--text-title);
+}
+
+
+
+.clientes-table tbody tr:hover {
+    background-color: var(--contrast);
+
+    cursor: pointer;
+}
+
+
+
+
 
 
 

@@ -1,8 +1,16 @@
-<body>
-    <main>
-        <h2>Lista de citas</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de citas</title>
+    <link rel="stylesheet" href="path/to/your/styles.css">
+</head>
+<body class="citas-body">
+    <main class="citas-main">
+        <h2 class="citas-heading">Lista de citas</h2>
         <?php if (!empty($mensaje)): ?>
-            <p class="mensaje"><?php echo $mensaje; ?></p>
+            <p class="citas-mensaje"><?php echo $mensaje; ?></p>
         <?php endif; ?>
         <?php if (!empty($citas)): ?>
             <table class="citas-table">
@@ -40,30 +48,30 @@
                 </tbody>
             </table>
         <?php else: ?>
-            <p>No hay citas disponibles.</p>
+            <p class="citas-no-citas">No hay citas disponibles.</p>
         <?php endif; ?>
 
         <!-- Agregar formulario para agregar nueva cita si es administrador -->
         <?php if ($rol === 'admin'): ?>
-            <div class=" nuevo">
-                <h2 class="registro-form-heading">Crear nueva cita</h2>
-                <form action="<?= BASE_URL ?>nueva_cita" method="POST">
+            <div class="citas-nuevo">
+                <h2 class="citas-registro-form-heading">Crear nueva cita</h2>
+                <form action="<?= BASE_URL ?>nueva_cita" method="POST" class="citas-registro-form">
                     <label for="fecha_hora">Fecha y Hora:</label><br>
                     <input type="datetime-local" id="fecha_hora" name="fecha_hora" required><br><br>
                     <label for="descripcion">Descripción:</label><br>
                     <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
                     <input type="hidden" id="usuario_id" name="usuario_id" value="<?= htmlspecialchars($usuario_id, ENT_QUOTES, 'UTF-8'); ?>">
-                    <label for="cliente_id">ID Cliente:</label><br>
+                    <label for="cliente">ID Cliente:</label><br>
                     <select id="cliente" name="cliente" required class="registro-select">
                         <?php foreach ($clientes as $cliente): ?>
                             <option value="<?php echo htmlspecialchars($cliente->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($cliente->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <input type="submit" value="nueva_cita" class="form-submit">
+                    <input type="submit" value="Crear nueva cita" class="form-submit">
                 </form>
             </div>
 
-            <h2 class="editar-titulo">Editar Citas ya existentes</h2>
+            <h2 class="citas-editar-titulo">Editar Citas ya existentes</h2>
             <table class="citas-table">
                 <thead>
                     <tr>
@@ -93,14 +101,13 @@
                                     <button type="submit" class="form-submit">Guardar</button>
                                 </td>
                             </form>
-                           
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         <?php else: ?>
-            <p>No hay citas disponibles.</p>
+            <p class="citas-no-citas">No hay citas disponibles.</p>
         <?php endif; ?>
-    </main>    
+    </main>
 </body>
 </html>
