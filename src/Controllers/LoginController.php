@@ -47,11 +47,13 @@ class LoginController {
             if ($user) {
                 session_start();
                 $_SESSION['email'] = $user->getEmail();
+                $_SESSION['usuario'] = $user->getUsuario();
                 
                 // Si se marca la casilla de "recordar usuario", establecer la cookie
                 
                 // Establecer el nombre de usuario como valor de la cookie
                 setcookie("email_recordado", $user->getEmail(), time() + (30 * 24 * 60 * 60), "/");
+                setcookie("usuario_recordado", $user->getUsuario(), time() + (30 * 24 * 60 * 60), "/");
                 
                 
             } else {
@@ -61,11 +63,12 @@ class LoginController {
     
         // Verificar si la cookie "email_recordado" existe y establecer la variable $emailRecordado
         $emailRecordado = isset($_COOKIE['email_recordado']) ? $_COOKIE['email_recordado'] : null;
+        $usuarioRecordado = isset($_COOKIE['usuario_recordado']) ? $_COOKIE['usuario_recordado'] : null;
     
         // Llama a mostrarBlog con el posible mensaje de error del login y la variable $emailRecordado
         $WebController = new WebController();
 
-        return $WebController->mostrarBienvenida($emailRecordado);
+        return $WebController->mostrarBienvenida($usuarioRecordado); // este parámetro se cambia por email recordado en función de si me quiero logear con usuario o email
         
     }
 

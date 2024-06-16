@@ -31,15 +31,17 @@
 
       Router::add('POST', '/login', function () {
         // Verificar si se ha enviado el formulario de inicio de sesión
-        if (isset($_POST['email']) && isset($_POST['password'])) {
+        /* if (isset($_POST['email']) && isset($_POST['password'])) { */
+            if (isset($_POST['usuario']) && isset($_POST['password'])) {
             // Obtener el nombre de usuario y la contraseña del formulario
-            $email = $_POST['email'];
+            //$email = $_POST['email'];
+            $usuario = $_POST['usuario'];
             $password = $_POST['password'];
     
             // Crear una instancia del controlador de usuarios
             $LoginController = new LoginController();
             // Llamar al método login del controlador de usuarios con el nombre de usuario y la contraseña
-            $LoginController->login($email, $password);
+            $LoginController->login($usuario, $password);
         }
     });
       

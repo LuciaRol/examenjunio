@@ -100,6 +100,42 @@
             }
         }
 
+        // si me logeo con email esta función la puedo quitar y poner en usuarios service, línea 33 o 21, findbyemail
+        public function findLogin(string $email): ?Usuarios {
+            try {
+                // esto me sirve para buscar por email
+                //$this->sql = $this->conexion->prepareSQL("SELECT * FROM usuarios WHERE email = :email LIMIT 1;");
+                // esto me sirve para buscar por usuario
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM usuarios WHERE usuario = :email LIMIT 1;");
+
+                $this->sql->bindValue(":email", $email, PDO::PARAM_STR);
+                $this->sql->execute();
+                // Obtén los datos como un array asociativo
+                $usuarioData = $this->sql->fetch(PDO::FETCH_ASSOC);
+                
+                $this->sql->closeCursor();
+                
+                // Verifica si se encontró un usuario
+                if ($usuarioData) {
+                    // Crea un objeto Usuarios utilizando los datos recuperados
+                    $usuario = new Usuarios(
+                        $usuarioData['id'],
+                        $usuarioData['nombre'],
+                        $usuarioData['apellidos'],
+                        $usuarioData['usuario'],
+                        $usuarioData['email'],
+                        $usuarioData['contrasena'],
+                        $usuarioData['rol']
+                    );
+                    return $usuario; // Devuelve el objeto Usuarios si se encontró el usuario
+                } else {
+                    return null; // Devuelve null si no se encontró el usuario
+                }
+            } catch (PDOException $e) {
+                return null; // Devuelve null en caso de error
+            }
+        }
+
         public function actualizarUsuario(string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
             try {
                 // Esta query actualiza el usuario. Cambiar email por usuario dependiendo de cual sea el campo clave de cada apliación

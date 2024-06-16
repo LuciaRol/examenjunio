@@ -18,7 +18,7 @@
 
         //utilizar esta funcion si ciframoscontrasena
         public function verificaCredencialescontrasenacifrada(string $email, string $password): ?Usuarios {
-            $user = $this->userRepository->findByemail($email);
+            $user = $this->userRepository->findLogin($email);
             
             // Verifica que el usuario exista y que la contraseña coincida
             if ($user && password_verify($password, $user->getContrasena())) {
@@ -30,7 +30,7 @@
         }
         //utilizar esta funcion si no ciframos contrasena
         public function verificaCredenciales(string $email, string $password): ?Usuarios {
-            $user = $this->userRepository->findByemail($email);
+            $user = $this->userRepository->findLogin($email);
             
             // Verifica que el usuario exista y que la contraseña coincida
             if ($user && $password == $user->getContrasena()) {

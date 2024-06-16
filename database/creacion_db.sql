@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS usuarios(
     contrasena VARCHAR(255) NOT NULL,
     rol VARCHAR(20),
     CONSTRAINT pk_usuarios PRIMARY KEY (id),
-    CONSTRAINT uq_email UNIQUE (email) 
+    CONSTRAINT uq_email UNIQUE (email),
+    CONSTRAINT uq_usuario UNIQUE (usuario) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS categorias;
