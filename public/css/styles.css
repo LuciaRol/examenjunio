@@ -431,6 +431,10 @@ h2 {
     box-sizing: border-box;
 }
 
+.productos-table .img_meme{
+    width: 100px;
+}
+
 /* LOGIN */
 .login-container {
     height: 65vh;
