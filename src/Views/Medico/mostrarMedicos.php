@@ -38,28 +38,29 @@
    
     <!-- Formulario para crear un nuevo medico -->
     <?php if ($rol === 'admin'): ?>
+        <h2 class="card-h2">Registrar nuevo médico</h2>
         <div class="cliente-container">
-    <div class="cliente-card">
-            <h2 class="cliente-card-h2">Crear nuevo medico</h2>
-            <form action="<?= BASE_URL ?>registro_medico" method="POST" class="cliente-form">
-                <label for="nombre_cliente" class="cliente-form-label">Nombre:</label>
-                <input type="text" id="nombre_medico" name="nombre_medico" required class="cliente-form-input"><br><br>
+        <div class="cliente-card">
+                <h2 class="cliente-card-h2">Crear nuevo medico</h2>
+                <form action="<?= BASE_URL ?>registro_medico" method="POST" class="cliente-form">
+                    <label for="nombre_cliente" class="cliente-form-label">Nombre:</label>
+                    <input type="text" id="nombre_medico" name="nombre_medico" required class="cliente-form-input"><br><br>
+                    
+                    <label for="apellidos_medico" class="cliente-form-label">Apellidos:</label>
+                    <input type="text" id="apellidos_medico" name="apellidos_medico" required class="cliente-form-input"><br><br>
+                    
+                    <label for="telefono_medico" class="cliente-form-label">Teléfono:</label>
+                    <input type="text" id="telefono_medico" name="telefono_medico" class="cliente-form-input"><br><br>
+                    
+                    <label for="email_medico" class="cliente-form-label">Email:</label>
+                    <input type="email" id="email_medico" name="email_medico" class="cliente-form-input"><br><br>
+                    
+                    <!-- Campo oculto para usuario_id -->
+                    <input type="hidden" id="usuario_id" name="usuario_id" value="<?= htmlspecialchars($usuario_id, ENT_QUOTES, 'UTF-8'); ?>">
                 
-                <label for="apellidos_medico" class="cliente-form-label">Apellidos:</label>
-                <input type="text" id="apellidos_medico" name="apellidos_medico" required class="cliente-form-input"><br><br>
-                
-                <label for="telefono_medico" class="cliente-form-label">Teléfono:</label>
-                <input type="text" id="telefono_medico" name="telefono_medico" class="cliente-form-input"><br><br>
-                
-                <label for="email_medico" class="cliente-form-label">Email:</label>
-                <input type="email" id="email_medico" name="email_medico" class="cliente-form-input"><br><br>
-                
-                <!-- Campo oculto para usuario_id -->
-                <input type="hidden" id="usuario_id" name="usuario_id" value="<?= htmlspecialchars($usuario_id, ENT_QUOTES, 'UTF-8'); ?>">
-            
-                <input type="submit" value="Crear medico" class="cliente-form-submit">
-            </form>
-        </div>
+                    <input type="submit" value="Crear medico" class="cliente-form-submit">
+                </form>
+            </div>
     </div>
 
     <?php endif; ?>

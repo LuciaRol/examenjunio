@@ -60,5 +60,5 @@ CREATE TABLE IF NOT EXISTS citas(
     fecha_registro DATETIME NOT NULL,
     CONSTRAINT pk_citas PRIMARY KEY (id),
     CONSTRAINT fk_cita_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    CONSTRAINT fk_cita_medico FOREIGN KEY (medico_id) REFERENCES medicos_cita(id)
+    CONSTRAINT fk_cita_medico FOREIGN KEY (medico_id) REFERENCES medicos(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

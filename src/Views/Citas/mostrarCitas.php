@@ -19,8 +19,8 @@
                         <th>ID</th>
                         <th>Fecha y Hora</th>
                         <th>Descripción</th>
-                        <th>ID Usuario</th>
-                        <th>ID Cliente</th>
+                        <th>Usuario</th>
+                        <th>Médico</th>
                         <th>Fecha de Registro</th>
                         <th>Acciones</th>
                     </tr>
@@ -32,7 +32,7 @@
                             <td><?php echo htmlspecialchars($cita->getFechaHora(), ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><?php echo htmlspecialchars($cita->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><?php echo htmlspecialchars($cita->getNombreUsuario(), ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($cita->getNombreCliente(), ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($cita->getNombreMedico(), ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><?php echo htmlspecialchars($cita->getFechaRegistro(), ENT_QUOTES, 'UTF-8'); ?></td>
                             <td>
                                 <?php if ($rol === 'admin'): ?>
@@ -61,10 +61,10 @@
                     <label for="descripcion">Descripción:</label><br>
                     <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
                     <input type="hidden" id="usuario_id" name="usuario_id" value="<?= htmlspecialchars($usuario_id, ENT_QUOTES, 'UTF-8'); ?>">
-                    <label for="cliente">ID Cliente:</label><br>
-                    <select id="cliente" name="cliente" required class="registro-select">
-                        <?php foreach ($clientes as $cliente): ?>
-                            <option value="<?php echo htmlspecialchars($cliente->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($cliente->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
+                    <label for="medico">ID medico:</label><br>
+                    <select id="medico" name="medico" required class="registro-select">
+                        <?php foreach ($medicos as $medico): ?>
+                            <option value="<?php echo htmlspecialchars($medico->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($medico->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
                         <?php endforeach; ?>
                     </select>
                     <input type="submit" value="Crear nueva cita" class="form-submit">
@@ -78,8 +78,8 @@
                         <th>ID</th>
                         <th>Fecha y Hora</th>
                         <th>Descripción</th>
-                        <th>ID Usuario</th>
-                        <th>ID Cliente</th>
+                        <th>Usuario</th>
+                        <th>Médico</th>
                         <th>Fecha de Registro</th>
                         <th>Acciones</th>
                     </tr>
@@ -95,7 +95,7 @@
                                 <td><input type="datetime-local" name="fecha_hora" value="<?php echo htmlspecialchars($cita->getFechaHora(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                                 <td><textarea name="descripcion"><?php echo htmlspecialchars($cita->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></textarea></td>
                                 <td><input type="number" name="usuario_id" value="<?php echo htmlspecialchars($cita->getUsuarioId(), ENT_QUOTES, 'UTF-8'); ?>" readonly></td>
-                                <td><input type="number" name="cliente_id" value="<?php echo htmlspecialchars($cita->getClienteId(), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                <td><input type="number" name="medico_id" value="<?php echo htmlspecialchars($cita->getmedicoId(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                                 <td><?php echo htmlspecialchars($cita->getFechaRegistro(), ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td>
                                     <button type="submit" class="form-submit">Guardar</button>

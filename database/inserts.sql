@@ -24,7 +24,7 @@ INSERT INTO productos (categoria_id, nombre, descripcion, precio) VALUES
 
 
 -- Insertar datos en la tabla medicos_cita
-INSERT INTO medicos_cita (nombre, apellidos, telefono, email, usuario_id) VALUES
+INSERT INTO medicos (nombre, apellidos, telefono, email, usuario_id) VALUES
 ('medico1', 'Apellido1', '111111111', 'medico1@example.com', 1),
 ('medico2', 'Apellido2', '222222222', 'medico2@example.com', 2),
 ('medico3', 'Apellido3', '333333333', 'medico3@example.com', 3);

@@ -8,29 +8,29 @@ class Cita
     private string $fecha_hora;
     private ?string $descripcion;
     private int $usuario_id;
-    private int $cliente_id;
+    private int $medico_id;
     private string $fecha_registro;
     private string $nombre_usuario;
-    private string $nombre_cliente;
+    private string $nombre_medico;
 
     public function __construct(
         int $id,
         string $fecha_hora,
         ?string $descripcion,
         int $usuario_id,
-        int $cliente_id,
+        int $medico_id,
         string $fecha_registro,
         string $nombre_usuario,
-        string $nombre_cliente,
+        string $nombre_medico,
     ) {
         $this->id = $id;
         $this->fecha_hora = $fecha_hora;
         $this->descripcion = $descripcion;
         $this->usuario_id = $usuario_id;
-        $this->cliente_id = $cliente_id;
+        $this->medico_id = $medico_id;
         $this->fecha_registro = $fecha_registro;
         $this->nombre_usuario = $nombre_usuario;
-        $this->nombre_cliente = $nombre_cliente;
+        $this->nombre_medico = $nombre_medico;
     }
 
     public function getCitaId(): int
@@ -53,9 +53,9 @@ class Cita
         return $this->usuario_id;
     }
 
-    public function getClienteId(): int
+    public function getmedicoId(): int
     {
-        return $this->cliente_id;
+        return $this->medico_id;
     }
 
     public function getFechaRegistro(): string
@@ -69,9 +69,9 @@ class Cita
         return $this->nombre_usuario;
     }
     
-    public function getNombreCliente(): string
+    public function getNombremedico(): string
     {
-        return $this->nombre_cliente;
+        return $this->nombre_medico;
     }
     
 }

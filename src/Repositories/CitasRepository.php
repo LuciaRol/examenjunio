@@ -20,15 +20,15 @@
                                                                 c.fecha_hora, 
                                                                 c.descripcion, 
                                                                 c.usuario_id,
-                                                                c.cliente_id,
+                                                                c.medico_id,
                                                                 c.fecha_registro,
                                                                 u.nombre AS nombre_usuario, 
-                                                                cc.nombre AS nombre_cliente
+                                                                cc.nombre AS nombre_medico
                                                         FROM citas c
                                                         JOIN usuarios u 
                                                             ON c.usuario_id = u.id
-                                                        JOIN clientes_cita cc 
-                                                            ON c.cliente_id = cc.id;");
+                                                        JOIN medicos cc 
+                                                            ON c.medico_id = cc.id;");
 
 
 
@@ -45,14 +45,14 @@
             return $citaCommit;
         }
         
-        public function guardarcita(string $fecha_hora,string $descripcion,int $usuario_id,int $cliente_id, string $fecha_registro): bool {
+        public function guardarcita(string $fecha_hora,string $descripcion,int $usuario_id,int $medico_id, string $fecha_registro): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO citas (fecha_hora, descripcion, usuario_id, cliente_id, fecha_registro) 
-                                                        VALUES (:fecha_hora, :descripcion, :usuario_id, :cliente_id, :fecha_registro)");
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO citas (fecha_hora, descripcion, usuario_id, medico_id, fecha_registro) 
+                                                        VALUES (:fecha_hora, :descripcion, :usuario_id, :medico_id, :fecha_registro)");
                 $this->sql->bindParam(':fecha_hora', $fecha_hora, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
                 $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
-                $this->sql->bindParam(':cliente_id', $cliente_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':medico_id', $medico_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':fecha_registro', $fecha_registro, PDO::PARAM_STR);
 
                 $this->sql->execute();
@@ -62,18 +62,18 @@
             }
         }
 
-        public function editarcita(int $citaId, string $fecha_hora, string $descripcion, int $usuario_id, int $cliente_id): bool {
+        public function editarcita(int $citaId, string $fecha_hora, string $descripcion, int $usuario_id, int $medico_id): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("UPDATE citas SET 
                                                             fecha_hora = :fecha_hora, 
                                                             descripcion = :descripcion, 
                                                             usuario_id = :usuario_id, 
-                                                            cliente_id = :cliente_id
+                                                            medico_id = :medico_id
                                                         WHERE id = :citaId");
                 $this->sql->bindParam(':fecha_hora', $fecha_hora, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
                 $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
-                $this->sql->bindParam(':cliente_id', $cliente_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':medico_id', $medico_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':citaId', $citaId, PDO::PARAM_INT);
                 $this->sql->execute();
                 return true;

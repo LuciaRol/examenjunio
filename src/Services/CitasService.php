@@ -1,9 +1,9 @@
 <?php
     namespace Services;
-    use Repositories\citasRepository;
-    class citasService{
+    use Repositories\CitasRepository;
+    class CitasService{
         
-        private citasRepository $citasRepository;
+        private CitasRepository $citasRepository;
         function __construct() {
             $this->citasRepository = new citasRepository();
         }
@@ -19,8 +19,8 @@
                                                     
         }
         
-        public function guardarcita(string $fecha_hora,string $descripcion,int $usuario_id,int $cliente_id, string $fecha_registro): bool {
-            return $this->citasRepository->guardarcita($fecha_hora, $descripcion, $usuario_id, $cliente_id, $fecha_registro);
+        public function guardarcita(string $fecha_hora,string $descripcion,int $usuario_id,int $medico_id, string $fecha_registro): bool {
+            return $this->citasRepository->guardarcita($fecha_hora, $descripcion, $usuario_id, $medico_id, $fecha_registro);
         }
         
         public function obtenercitaPorId(int $id): ?array {
@@ -38,8 +38,8 @@
         public function buscarcitas(string $terminoBusqueda): ?array {
             return $this->citasRepository->buscarcitas($terminoBusqueda);
         }
-        public function editarcita(int $citaId, string $fecha_hora, string $descripcion, int $usuario_id, int $cliente_id): bool {
-            return $this->citasRepository->editarcita($citaId, $fecha_hora, $descripcion, $usuario_id, $cliente_id
+        public function editarcita(int $citaId, string $fecha_hora, string $descripcion, int $usuario_id, int $medico_id): bool {
+            return $this->citasRepository->editarcita($citaId, $fecha_hora, $descripcion, $usuario_id, $medico_id
         );
         }
         
