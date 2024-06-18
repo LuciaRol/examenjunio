@@ -52,7 +52,7 @@
         <?php endif; ?>
 
         <!-- Agregar formulario para agregar nueva cita si es administrador -->
-        <?php if ($rol === 'admin'): ?>
+        
             <div class="citas-nuevo">
                 <h2 class="citas-registro-form-heading">Crear nueva cita</h2>
                 <form action="<?= BASE_URL ?>nueva_cita" method="POST" class="citas-registro-form">
@@ -61,7 +61,14 @@
                     <label for="descripcion">Descripción:</label><br>
                     <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
                     <input type="hidden" id="usuario_id" name="usuario_id" value="<?= htmlspecialchars($usuario_id, ENT_QUOTES, 'UTF-8'); ?>">
-                    <label for="medico">ID medico:</label><br>
+                    <label for="medico">Categoría:</label><br>
+                    <!-- <select id="categoria" name="categoria" required class="registro-select">
+                    <?php //foreach ($categorias as $categoria): ?>
+                        <option value="
+                    <?php //echo htmlspecialchars($categoria->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php //echo htmlspecialchars($medico->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
+                    <?php //endforeach; ?>
+                    </select> -->
+                    <label for="medico">Médico:</label><br>
                     <select id="medico" name="medico" required class="registro-select">
                         <?php foreach ($medicos as $medico): ?>
                             <option value="<?php echo htmlspecialchars($medico->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($medico->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
@@ -71,6 +78,7 @@
                 </form>
             </div>
 
+            <?php if ($rol === 'admin'): ?>
             <h2 class="citas-editar-titulo">Editar Citas ya existentes</h2>
             <table class="citas-table">
                 <thead>
