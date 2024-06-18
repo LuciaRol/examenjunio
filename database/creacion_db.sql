@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
     CONSTRAINT uq_usuario UNIQUE (usuario) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+/* esto son las especialidades */
 DROP TABLE IF EXISTS categorias;
 CREATE TABLE IF NOT EXISTS categorias(
     id INT AUTO_INCREMENT NOT NULL,
@@ -23,6 +24,8 @@ CREATE TABLE IF NOT EXISTS categorias(
     CONSTRAINT pk_categorias PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+
+/* esto son los servicios */
 DROP TABLE IF EXISTS productos;
 CREATE TABLE IF NOT EXISTS productos(
     id INT AUTO_INCREMENT NOT NULL,
@@ -35,43 +38,16 @@ CREATE TABLE IF NOT EXISTS productos(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
-
-DROP TABLE IF EXISTS pedidos;
-CREATE TABLE IF NOT EXISTS pedidos(
-    id INT AUTO_INCREMENT NOT NULL,
-    usuario_id INT NOT NULL,
-    provincia VARCHAR(100) NOT NULL,
-    localidad VARCHAR(100) NOT NULL,
-    direccion VARCHAR(255) NOT NULL,
-    coste FLOAT(10,2) NOT NULL,
-    estado VARCHAR(20) NOT NULL,
-    fecha DATE,
-    hora TIME,
-    CONSTRAINT pk_pedidos PRIMARY KEY (id),
-    CONSTRAINT fk_pedido_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-DROP TABLE IF EXISTS lineas_pedidos;
-CREATE TABLE IF NOT EXISTS lineas_pedidos(
-    id INT AUTO_INCREMENT NOT NULL,
-    pedido_id INT NOT NULL,
-    producto_id INT NOT NULL,
-    unidades INT NOT NULL,
-    CONSTRAINT pk_lineas_pedidos PRIMARY KEY (id),
-    CONSTRAINT fk_linea_pedido FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-    CONSTRAINT fk_linea_producto FOREIGN KEY (producto_id) REFERENCES productos(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-DROP TABLE IF EXISTS clientes_cita;
-CREATE TABLE IF NOT EXISTS clientes_cita(
+DROP TABLE IF EXISTS medicos;
+CREATE TABLE IF NOT EXISTS medicos(
     id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     apellidos VARCHAR(255) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
     usuario_id INT NOT NULL,
-    CONSTRAINT pk_clientes_cita PRIMARY KEY (id),
-    CONSTRAINT fk_cliente_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+    CONSTRAINT pk_medicos_cita PRIMARY KEY (id),
+    CONSTRAINT fk_medico_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS citas;
@@ -80,9 +56,9 @@ CREATE TABLE IF NOT EXISTS citas(
     fecha_hora DATETIME NOT NULL,
     descripcion TEXT,
     usuario_id INT NOT NULL,
-    cliente_id INT NOT NULL,
+    medico_id INT NOT NULL,
     fecha_registro DATETIME NOT NULL,
     CONSTRAINT pk_citas PRIMARY KEY (id),
     CONSTRAINT fk_cita_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    CONSTRAINT fk_cita_cliente FOREIGN KEY (cliente_id) REFERENCES clientes_cita(id)
+    CONSTRAINT fk_cita_medico FOREIGN KEY (medico_id) REFERENCES medicos_cita(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
