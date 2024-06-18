@@ -30,13 +30,11 @@ CREATE TABLE IF NOT EXISTS productos(
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     precio FLOAT(10,2) NOT NULL,
-    stock INT NOT NULL,
-    oferta VARCHAR(2),
-    fecha DATE NOT NULL,
-    imagen VARCHAR(255),
     CONSTRAINT pk_productos PRIMARY KEY (id),
     CONSTRAINT fk_producto_categoria FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
 
 DROP TABLE IF EXISTS pedidos;
 CREATE TABLE IF NOT EXISTS pedidos(

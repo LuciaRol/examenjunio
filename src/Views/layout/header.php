@@ -7,16 +7,13 @@
         </div>
         <nav class="nav_container">
             <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
-            <a class="nav_link" href="<?= BASE_URL ?>categorias">Categorias</a>
-            <a class="nav_link" href="<?= BASE_URL ?>productos">Productos</a>
-            <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
-            <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
-            <a class="nav_link" href="<?= BASE_URL ?>carrito">Carrito</a>
+            <a class="nav_link" href="<?= BASE_URL ?>categorias">Especialidades</a>
+            <a class="nav_link" href="<?= BASE_URL ?>productos">Servicios</a>
+            <a class="nav_link" href="<?= BASE_URL ?>medicos">Médicos</a>
             <a class="nav_link" href="<?= BASE_URL ?>citas">Citas</a>
-            <a class="nav_link" href="<?= BASE_URL ?>clientes">Clientes-Cita</a>
+            <a class="nav_link" href="<?= BASE_URL ?>usuario">Mi perfil</a>
             <a class="nav_link" href="<?= BASE_URL ?>iniciosesion">Login</a>
             <a class="nav_link" href="<?= BASE_URL ?>registro">Registro</a>
-            <a class="nav_link" href="<?= BASE_URL ?>api_producto">API</a>
         </nav>
     </div>
 

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de categorías</title>
+    <title>Lista de especialidades</title>
     <link rel="stylesheet" type="text/css" href="public/css/styles.css">
 </head>
 <body>
-    <h2 class="card-h2">Categorías</h2>
+    <h2 class="card-h2">Especialidades</h2>
     <div class="card-container">
     <?php if (!empty($mensaje)): ?>
             <p class="mensaje"><?php echo $mensaje; ?></p>
@@ -16,12 +16,10 @@
             <div class="card">
                 <div class="card-body">
                     <article class="categoria">
-                        <p>ID: <?php echo $categoria->getId(); ?></p>
-                        <p>Nombre: <?php echo $categoria->getNombre(); ?></p>
+                        <p><?php echo $categoria->getNombre(); ?></p>
                         <!-- Formulario para mostrar productos de esta categoría -->
                         <form action="<?= BASE_URL ?>busqueda" method="POST">
                             <input type="hidden" name="q" value="<?php echo $categoria->getNombre(); ?>">
-                            <input type="submit" value="Mostrar productos de categoría" class="form-submit">
                         </form>
                     </article>
                 </div>
