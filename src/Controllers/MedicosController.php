@@ -1,17 +1,17 @@
 <?php
 
 namespace Controllers;
-use Services\ClientesService;
+use Services\MedicosService;
 use Lib\Pages;
-use Models\Cliente; 
+use Models\Medico; 
 use Models\Validacion; 
 use Services\UsuariosService; 
 
 
-class ClientesController {
+class medicosController {
 
     private Pages $pagina;
-    private ClientesService $ClientesService;
+    private MedicosService $medicosService;
 
     private UsuariosService $usuariosService;
 
@@ -20,14 +20,14 @@ class ClientesController {
         // Crea una nueva instancia de Pages
         $this->pagina = new Pages();
         // Crea una instancia del servicio de categorías
-        $this->ClientesService = new ClientesService();
+        $this->medicosService = new MedicosService();
 
         $this->usuariosService = new UsuariosService();
     }
 
     public function mostrarTodos($emailRecordado = null, $mensaje = ''): void
     {
-        $ClientesModel = $this->todasClientes();
+        $medicosModel = $this->todasmedicos();
         
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
@@ -42,8 +42,8 @@ class ClientesController {
             $usuario_id = $email->getId(); }
 
         // Devolver la renderización de la página con los objetos de categoría, el correo electrónico de la sesión y el mensaje
-        $this->pagina->render('Clientes/mostrarClientes', [
-            'Clientes' => $ClientesModel, 
+        $this->pagina->render('Medico/mostrarMedicos', [
+            'medicos' => $medicosModel, 
             'emailSesion' => $emailSesion, 
             'mensaje' => $mensaje,
             'rol' => $rol,
@@ -51,30 +51,30 @@ class ClientesController {
         ]);
     }
 
-    public function todasClientes(): array {
+    public function todasmedicos(): array {
         // Obtener todas las categorías
-        $Clientes = $this->ClientesService->obtenerClientes();
+        $medicos = $this->medicosService->obtenermedicos();
 
         // Crear un array para almacenar los objetos de categoría
-        $ClientesModel = [];
-        foreach ($Clientes as $Cliente) {
-            // Crear una nueva instancia de Cliente con los datos de la categoría
-            $ClienteModel = new Cliente();
-            $ClienteModel->setId($Cliente['id']);
-            $ClienteModel->setNombre($Cliente['nombre']);
-            $ClienteModel->setApellidos($Cliente['apellidos']);
-            $ClienteModel->setTelefono($Cliente['telefono']);
-            $ClienteModel->setEmail($Cliente['email']);
-            $ClienteModel->setUsuarioId($Cliente['usuario_id']);
+        $medicosModel = [];
+        foreach ($medicos as $medico) {
+            // Crear una nueva instancia de medico con los datos de la categoría
+            $medicoModel = new Medico();
+            $medicoModel->setId($medico['id']);
+            $medicoModel->setNombre($medico['nombre']);
+            $medicoModel->setApellidos($medico['apellidos']);
+            $medicoModel->setTelefono($medico['telefono']);
+            $medicoModel->setEmail($medico['email']);
+            $medicoModel->setUsuarioId($medico['usuario_id']);
 
-            // Agregar la instancia de Cliente al array
-            $ClientesModel[] = $ClienteModel;
+            // Agregar la instancia de medico al array
+            $medicosModel[] = $medicoModel;
         }
-        return $ClientesModel;
+        return $medicosModel;
     }
 
-    public function registroCliente($nombreCliente, $apellidosCliente, $telefonoCliente, $emailCliente, $usuario_id):void {
-        $mensaje = 'Regístrate como admin para crear el cliente'; // Inicializamos la variable de mensaje
+    public function registromedico($nombremedico, $apellidosmedico, $telefonomedico, $emailmedico, $usuario_id):void {
+        $mensaje = 'Regístrate como admin para crear el medico'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
@@ -85,29 +85,29 @@ class ClientesController {
             
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
-                $nombreCliente = Validacion::saneamientoString($nombreCliente);
-                $apellidosCliente = Validacion::saneamientoString($apellidosCliente);
-                $telefonoCliente = Validacion::saneartelefono($telefonoCliente);
+                $nombremedico = Validacion::saneamientoString($nombremedico);
+                $apellidosmedico = Validacion::saneamientoString($apellidosmedico);
+                $telefonomedico = Validacion::saneartelefono($telefonomedico);
                 $usuario_id = Validacion::sanearNumero($usuario_id);
-                if (empty($nombreCliente) || empty($apellidosCliente) || empty($telefonoCliente) || empty($usuario_id) || empty($emailCliente)) {
+                if (empty($nombremedico) || empty($apellidosmedico) || empty($telefonomedico) || empty($usuario_id) || empty($emailmedico)) {
              
                     // Si el nombre de la categoría está vacío, asignar un mensaje de error
-                    $mensaje = "Debe proporcionar todos los campos para el nuevo cliente de forma correcta. Revisa de introducir solo los campos correctos para el teléfono (números con los iconos de + y separadores -)";
+                    $mensaje = "Debe proporcionar todos los campos para el nuevo medico de forma correcta. Revisa de introducir solo los campos correctos para el teléfono (números con los iconos de + y separadores -)";
                 } else {
                     // Guardar la nueva categoría si no está vacía
-                     // Intentar guardar el cliente
-                    $guardadoExitoso = $this->ClientesService->guardarCliente($nombreCliente, $apellidosCliente, $telefonoCliente, $emailCliente, $usuario_id);
+                     // Intentar guardar el medico
+                    $guardadoExitoso = $this->medicosService->guardarmedico($nombremedico, $apellidosmedico, $telefonomedico, $emailmedico, $usuario_id);
 
                     // Verificar el resultado y establecer el mensaje correspondiente
                     if ($guardadoExitoso) {
-                        $mensaje = "Cliente creado exitosamente.";
+                        $mensaje = "medico creado exitosamente.";
                     } else {
-                        $mensaje = "Error al crear el cliente. Por favor, inténtelo de nuevo.";
+                        $mensaje = "Error al crear el medico. Por favor, inténtelo de nuevo.";
                     }
                 }
             } else {
                 // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes
-                $mensaje = "No tienes permisos de administrador para registrar nuevos clientes.";
+                $mensaje = "No tienes permisos de administrador para registrar nuevos medicos.";
             }
         }
         

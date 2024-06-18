@@ -13,7 +13,7 @@
    use Controllers\RegistroController;
    use Controllers\ProductosAPIController;
    use Controllers\CitasController;
-   use Controllers\ClientesController;
+   use Controllers\MedicosController;
 
    use Services\ProductosService;
 
@@ -186,31 +186,31 @@
         }
     });
     
-    /********************* CLIENTES CITA  ******************************/
+    /********************* MÉDICOS  ******************************/
 
-    Router::add('GET','/clientes', function () {
-        return (new clientesController())->mostrarTodos();
+    Router::add('GET','/medicos', function () {
+        return (new MedicosController())->mostrarTodos();
     });
 
-    Router::add('POST', '/registro_cliente', function () {
-        // Verificar si se ha enviado el formulario para registrar un nuevo cliente
-        if (isset($_POST['nombre_cliente'], $_POST['apellidos_cliente'], $_POST['telefono_cliente'], $_POST['email_cliente'], $_POST['usuario_id'])) {
+    Router::add('POST', '/registro_medico', function () {
+        // Verificar si se ha enviado el formulario para registrar un nuevo medico
+        if (isset($_POST['nombre_medico'], $_POST['apellidos_medico'], $_POST['telefono_medico'], $_POST['email_medico'], $_POST['usuario_id'])) {
             // Obtener los datos del formulario
-            $nombreCliente = $_POST['nombre_cliente'];
-            $apellidosCliente = $_POST['apellidos_cliente'];
-            $telefonoCliente = $_POST['telefono_cliente'];
-            $emailCliente = $_POST['email_cliente'];
+            $nombremedico = $_POST['nombre_medico'];
+            $apellidosmedico = $_POST['apellidos_medico'];
+            $telefonomedico = $_POST['telefono_medico'];
+            $emailmedico = $_POST['email_medico'];
             $usuario_id = $_POST['usuario_id'];
             
-            // Crear una instancia del controlador de clientes
-            $clientesController = new ClientesController();
+            // Crear una instancia del controlador de medicos
+            $medicosController = new MedicosController();
             
-            // Llamar al método para registrar un nuevo cliente del controlador de clientes
-            $clientesController->registroCliente($nombreCliente, $apellidosCliente, $telefonoCliente, $emailCliente, $usuario_id);
+            // Llamar al método para registrar un nuevo medico del controlador de medicos
+            $medicosController->registromedico($nombremedico, $apellidosmedico, $telefonomedico, $emailmedico, $usuario_id);
         } else {
             // Enviar una respuesta de error si faltan datos en el formulario
             http_response_code(400); // Bad Request
-            echo "Error: Faltan datos en el formulario de registro de cliente.";
+            echo "Error: Faltan datos en el formulario de registro de medico.";
             exit();
         }
     });
@@ -285,69 +285,13 @@
 
 
 
-    Router::add('GET','/pedidos', function (){
-        return (new PedidosController())->mostrarPedidos();
-    }); 
-    
-    // Esta función está disponible solo para rol admin
-    Router::add('POST', '/cambioestadopedido', function () {
-        // Verificar si se ha enviado el formulario para cambiar el estado del pedido
-        if (isset($_POST['pedido_id']) && isset($_POST['nuevo_estado'])) {
-            // Obtener la información del formulario
-            $pedido_id = $_POST['pedido_id'];
-            $nuevo_estado = $_POST['nuevo_estado'];
-            
-            // Llamar a la función para cambiar el estado del pedido pasando los parámetros necesarios
-            return (new PedidosController())->nuevoestado($pedido_id, $nuevo_estado);
-        }
-    });
-       
+   
     /********************* CARRITO  ******************************/
                 
-    Router::add('GET','/carrito', function (){
-        return (new CarritoController())->mostrarCarrito();
-    });
     
-
-    Router::add('POST', '/agregar_al_carrito', function () {
-        // Verificar si se ha enviado el formulario para agregar un producto al carrito
-        if (isset($_POST['producto_id'], $_POST['cantidad'])) {
-            // Obtener el ID del producto desde el formulario
-            $productoId = $_POST['producto_id'];
-            $cantidad = $_POST['cantidad'];
-            return (new CarritoController())->agregarAlCarrito($productoId, $cantidad);
-            
-        }
-    });
-    
-       
-    Router::add('POST', '/eliminar_producto_carrito', function () {
-        // Verificar si se ha enviado el formulario para eliminar un producto del carrito
-        if (isset($_POST['producto_key'])) {
-            // Obtener el ID del producto desde el formulario
-            $productoId = $_POST['producto_key'];
-            
-            // Llamar al método eliminarDelCarrito del controlador CarritoController
-            return (new CarritoController())->eliminarDelCarrito($productoId);
-        }
-    });
         
 
-    Router::add('POST', '/comprar_carrito', function () {
-        // Verificar si se ha enviado el formulario para comprar el carrito
-        if (isset($_POST['provincia'], $_POST['localidad'], $_POST['direccion'])) {
-            // Obtener la información del formulario
-            $provincia = $_POST['provincia'];
-            $localidad = $_POST['localidad'];
-            $direccion = $_POST['direccion'];
-            
-            // Calcular el coste total sumando los precios de los productos en el carrito
-            
-            // Llamar a la función comprar pasando los parámetros necesarios
-            return (new CarritoController())->comprar($provincia, $localidad, $direccion);
-        }
-    });
-
+   
     /********************* BÚSQUEDA  ******************************/
 
     Router::add('POST', '/busqueda', function () {
@@ -359,9 +303,7 @@
 
     /********************* API  ******************************/
 
-    Router::add('GET', '/api_producto', function () {
-        return (new ProductosAPIController())->mostrarProductosAPI();
-    });
+    
 
     /********************* ERROR  ******************************/
 

@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class Cliente {
+class Medico {
 
     private $id;
     private $nombre;
