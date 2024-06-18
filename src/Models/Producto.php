@@ -6,38 +6,22 @@ class Producto
 {
     private int $id;
     private int $categoria_id;
-    private string $nombre_categoria;
-
     private string $nombre;
     private ?string $descripcion;
     private float $precio;
-    private int $stock;
-    private ?string $oferta;
-    private string $fecha;
-    private ?string $imagen;
 
     public function __construct(
         int $id,
         int $categoria_id,
-        string $nombre_categoria,
         string $nombre,
         ?string $descripcion,
-        float $precio,
-        int $stock,
-        ?string $oferta,
-        string $fecha,
-        ?string $imagen
+        float $precio
     ) {
         $this->id = $id;
         $this->categoria_id = $categoria_id;
-        $this->nombre_categoria = $nombre_categoria;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->precio = $precio;
-        $this->stock = $stock;
-        $this->oferta = $oferta;
-        $this->fecha = $fecha;
-        $this->imagen = $imagen;
     }
 
     public function getId(): int
@@ -50,10 +34,6 @@ class Producto
         return $this->categoria_id;
     }
 
-    public function getNombre_categoria(): string
-    {
-        return $this->nombre_categoria;
-    }
     public function getNombre(): string
     {
         return $this->nombre;
@@ -69,23 +49,27 @@ class Producto
         return $this->precio;
     }
 
-    public function getStock(): int
-    {
-        return $this->stock;
+   public function setId(int $id): void {
+    $this->id = $id;
     }
 
-    public function getOferta(): ?string
-    {
-        return $this->oferta;
+    public function setCategoriaId(int $categoria_id): void {
+        $this->categoria_id = $categoria_id;
     }
 
-    public function getFecha(): string
-    {
-        return $this->fecha;
+	public function setNombre(string $nombre): void {
+        $this->nombre = $nombre;
     }
 
-    public function getImagen(): ?string
-    {
-        return $this->imagen;
+    public function setDescripcion(string $descripcion): void {
+        $this->descripcion = $descripcion;
     }
+
+	public function setPrecio(float $precio): void {
+        $this->precio = $precio;
+    }
+
+	
+
+    
 }

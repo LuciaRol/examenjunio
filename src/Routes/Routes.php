@@ -3,15 +3,12 @@
 
    use Controllers\CategoriasController;
    use Controllers\UsuarioController;
-   use Controllers\PedidosController;
    use Controllers\ProductosController;
-   use Controllers\CarritoController;
    use Lib\Router;
    use Controllers\ErrorController;
    use Controllers\WebController;
    use Controllers\LoginController;
    use Controllers\RegistroController;
-   use Controllers\ProductosAPIController;
    use Controllers\CitasController;
    use Controllers\MedicosController;
 
@@ -217,7 +214,7 @@
     
 
 
-    /********************* PRODUCTOS  ******************************/
+    /********************* SERVICIOS  ******************************/
 
 
     Router::add('GET','/productos', function (){
@@ -237,42 +234,32 @@
 
     Router::add('POST', '/nuevo_producto', function () {
         // Verificar si se ha enviado el formulario para crear un nuevo producto
-        if (isset($_POST['nuevo_producto'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['oferta'], $_POST['fecha'], $_POST['categoria'])) {
+        if (isset($_POST['nuevo_producto'], $_POST['descripcion'], $_POST['precio'], $_POST['categoria'])) {
             // Obtener la información del formulario
             $nombreProducto = $_POST['nuevo_producto'];
             $descripcion = $_POST['descripcion'];
             $precio = $_POST['precio'];
-            $stock = $_POST['stock'];
-            $oferta = $_POST['oferta'];
-            $fecha = $_POST['fecha'];
             $categoria_id = $_POST['categoria'];
-            $imagen = $_POST['imagen'];
             
             // Llamar a la función para registrar el nuevo producto
-            return (new ProductosController())->registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+            return (new ProductosController())->registroProducto($categoria_id, $nombreProducto, $descripcion, $precio);
         }
     });
 
 
     Router::add('POST', '/editar_producto', function () {
         // Verificar si se ha enviado el formulario para editar un producto
-        if (isset($_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['oferta'], $_POST['fecha'])) {
+        if (isset($_POST['nombre'], $_POST['descripcion'], $_POST['precio'])) {
             // Obtener la información del formulario
             $productoId = $_POST['producto_id'];
             $nombreProducto = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $precio = floatval($_POST['precio']); // Convertir a float
-            $stock = intval($_POST['stock']); // Convertir a int
-            $oferta = $_POST['oferta'];
-            $fecha = $_POST['fecha'];
-          
             $categoria_id = $_POST['categoria_id'];
     
-            // Validar los datos antes de continuar
-            // Aquí deberías incluir validaciones adicionales según tus requisitos
     
             // Llamar a la función para editar el producto
-            return (new ProductosController())->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
+            return (new ProductosController())->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio);
         } else {
             // Enviar una respuesta de error si faltan datos en el formulario
             http_response_code(400); // Bad Request

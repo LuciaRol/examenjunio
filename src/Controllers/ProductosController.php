@@ -37,14 +37,9 @@ class ProductosController
             $productoModel = new Producto(
                 $producto['id'],
                 $producto['categoria_id'],
-                $producto['categoria'],
                 $producto['nombre'],
                 $producto['descripcion'],
-                $producto['precio'],
-                $producto['stock'],
-                $producto['oferta'],
-                $producto['fecha'],
-                $producto['imagen']
+                $producto['precio']
             );
             // Agregar la instancia de Producto al array
             $productosModel[] = $productoModel;
@@ -70,7 +65,7 @@ class ProductosController
 
     
 
-    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen): void {
+    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio): void {
         $mensaje = 'Regístrate como admin para crear un producto'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -85,16 +80,14 @@ class ProductosController
                 $nombreProducto = Validacion::sanearString($nombreProducto);
                 $descripcion = Validacion::sanearString($descripcion);
                 $precio = Validacion::sanearNumero($precio);
-                $stock = Validacion::sanearNumero($stock);
-                $oferta = Validacion::sanearString($oferta);
     
                 // Validar campos obligatorios
-                if (empty($nombreProducto) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {
+                if (empty($nombreProducto) || empty($categoria_id) || empty($precio)) {
                     $mensaje = "Debe proporcionar todos los campos obligatorios.";
                 } else {
                     // Guardar el nuevo producto
                     
-                    $this->productosService->guardarProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+                    $this->productosService->guardarProducto($categoria_id, $nombreProducto, $descripcion, $precio);
                     $mensaje = "Producto creado exitosamente.";
                 }
             } else {
@@ -106,7 +99,7 @@ class ProductosController
         $this->mostrarProductos($email, $mensaje);
     }
 
-    public function editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha): void {
+    public function editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio): void {
         $mensaje = 'Regístrate como admin para editar un producto'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -121,8 +114,6 @@ class ProductosController
                 $nombreProducto = Validacion::sanearString($nombreProducto);
                 $descripcion = Validacion::sanearString($descripcion);
                 $precio = Validacion::sanearNumero($precio);
-                $stock = Validacion::sanearNumero($stock);
-                $oferta = Validacion::sanearString($oferta);
     
                 // Validar campos obligatorios
                 if (empty($nombreProducto) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {
@@ -130,7 +121,7 @@ class ProductosController
                 } else {
                     // Editar el producto existente
                     
-                    $this->productosService->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
+                    $this->productosService->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio);
                     $mensaje = "Producto actualizado exitosamente.";
                 }
             } else {
@@ -186,14 +177,9 @@ public function buscarProductos($terminoBusqueda): void
             $productoModel = new Producto(
                 $producto['id'],
                 $producto['categoria_id'],
-                $producto['categoria'],
                 $producto['nombre'],
                 $producto['descripcion'],
                 $producto['precio'],
-                $producto['stock'],
-                $producto['oferta'],
-                $producto['fecha'],
-                $producto['imagen']
             );
             $productosModel[] = $productoModel;
         }

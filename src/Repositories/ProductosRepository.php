@@ -20,10 +20,6 @@
                                                                     a.nombre, 
                                                                     a.descripcion, 
                                                                     a.precio, 
-                                                                    a.stock, 
-                                                                    a.oferta, 
-                                                                    a.fecha, 
-                                                                    a.imagen, 
                                                                     b.nombre as 'categoria' 
                                                         FROM productos a 
                                                         inner join categorias b on a.categoria_id = b.id");
@@ -40,43 +36,32 @@
             return $productoCommit;
         }
         
-        public function guardarProducto(int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, ?string $imagen): bool {
+        public function guardarProducto(int $categoria_id, string $nombre, ?string $descripcion, float $precio): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) 
-                                                        VALUES (:categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen)");
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO productos (categoria_id, nombre, descripcion, precio) 
+                                                        VALUES (:categoria_id, :nombre, :descripcion, :precio)");
                 $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
                 $this->sql->bindParam(':precio', $precio, PDO::PARAM_STR);
-                $this->sql->bindParam(':stock', $stock, PDO::PARAM_INT);
-                $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
-                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-                $this->sql->bindParam(':imagen', $imagen, PDO::PARAM_STR);
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {
                 return false;
             }
         }
-        public function editarProducto(int $productoId, int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha): bool {
+        public function editarProducto(int $productoId, int $categoria_id, string $nombre, ?string $descripcion, float $precio): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("UPDATE productos SET 
                                                             categoria_id = :categoria_id, 
                                                             nombre = :nombre, 
                                                             descripcion = :descripcion, 
-                                                            precio = :precio, 
-                                                            stock = :stock, 
-                                                            oferta = :oferta, 
-                                                            fecha = :fecha
+                                                            precio = :precio
                                                         WHERE id = :productoId");
                 $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
                 $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
                 $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
                 $this->sql->bindParam(':precio', $precio, PDO::PARAM_STR);
-                $this->sql->bindParam(':stock', $stock, PDO::PARAM_INT);
-                $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
-                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-                
                 $this->sql->bindParam(':productoId', $productoId, PDO::PARAM_INT);
                 $this->sql->execute();
                 return true;
@@ -85,7 +70,7 @@
             }
         }
         
-        public function bajarStockProductos(int $productoId, int $unidades): bool {
+        /* public function bajarStockProductos(int $productoId, int $unidades): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("
                                                             UPDATE productos SET 
@@ -99,7 +84,7 @@
             } catch (PDOException $e) {
                 return false;
             }
-        }
+        } */
         
 
         public function findById(int $id): ?array {
@@ -115,7 +100,7 @@
             }
         }
     
-        public function updateStock(int $id, int $nuevoStock): bool {
+        /* public function updateStock(int $id, int $nuevoStock): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("UPDATE productos SET stock = :stock WHERE id = :id");
                 $this->sql->bindParam(':stock', $nuevoStock, PDO::PARAM_INT);
@@ -125,7 +110,8 @@
             } catch (PDOException $e) {
                 return false;
             }
-        }
+        } */
+
         public function eliminarProducto(int $id): bool {
             try {
                 $this->sql = $this->conexion->prepareSQL("DELETE FROM productos WHERE id = :id");
@@ -153,11 +139,7 @@
                                                             a.categoria_id, 
                                                             a.nombre, 
                                                             a.descripcion, 
-                                                            a.precio, 
-                                                            a.stock, 
-                                                            a.oferta, 
-                                                            a.fecha, 
-                                                            a.imagen, 
+                                                            a.precio,   
                                                             b.nombre as 'categoria' 
                                                     FROM productos a inner join categorias b on a.categoria_id = b.id
                                                     where LOWER(a.descripcion) like :descripcion or LOWER(a.nombre) like :descripcion or LOWER(b.nombre) like :descripcion");
