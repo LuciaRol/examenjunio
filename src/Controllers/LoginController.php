@@ -41,19 +41,15 @@ class LoginController {
         $error = ''; // Creamos esta variable para que si todo va bien, no de error al mostrarBlog
     
         if ($email && $password) {
-            // Si contraeña cifrada, se pone esto:
-            // $user = $this->usuariosService->verificaCredencialescontrasenacifrada($email, $password);
             $user = $this->usuariosService->verificaCredenciales($email, $password);
             if ($user) {
                 session_start();
                 $_SESSION['email'] = $user->getEmail();
-                $_SESSION['usuario'] = $user->getUsuario();
                 
                 // Si se marca la casilla de "recordar usuario", establecer la cookie
                 
                 // Establecer el nombre de usuario como valor de la cookie
                 setcookie("email_recordado", $user->getEmail(), time() + (30 * 24 * 60 * 60), "/");
-                setcookie("usuario_recordado", $user->getUsuario(), time() + (30 * 24 * 60 * 60), "/");
                 
                 
             } else {
@@ -63,12 +59,12 @@ class LoginController {
     
         // Verificar si la cookie "email_recordado" existe y establecer la variable $emailRecordado
         $emailRecordado = isset($_COOKIE['email_recordado']) ? $_COOKIE['email_recordado'] : null;
-        $usuarioRecordado = isset($_COOKIE['usuario_recordado']) ? $_COOKIE['usuario_recordado'] : null;
+        //$usuarioRecordado = isset($_COOKIE['usuario_recordado']) ? $_COOKIE['usuario_recordado'] : null;
     
         // Llama a mostrarBlog con el posible mensaje de error del login y la variable $emailRecordado
         $WebController = new WebController();
 
-        return $WebController->mostrarBienvenida($usuarioRecordado); // este parámetro se cambia por email recordado en función de si me quiero logear con usuario o email
+        return $WebController->mostrarBienvenida($emailRecordado); // este parámetro se cambia por email recordado en función de si me quiero logear con usuario o email
         
     }
 

@@ -12,13 +12,13 @@
         public function register($nombre, $apellidos, $usuario, $email, $contrasena, $rol): ?string {
             // Llama al método del repositorio para insertar el usuario en la base de datos
             // Si la contraseña tiene que ser cifrada poner la siguiente línea por la otra:
-            // return $this->userRepository->registro_cifrado($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
-            return $this->userRepository->registro($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
+            return $this->userRepository->registro_cifrado($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
+            //return $this->userRepository->registro($nombre, $apellidos, $usuario, $email, $contrasena, $rol);
         }
 
         //utilizar esta funcion si ciframoscontrasena
         public function verificaCredencialescontrasenacifrada(string $email, string $password): ?Usuarios {
-            $user = $this->userRepository->findLogin($email);
+            $user = $this->userRepository->findByemail($email);
             
             // Verifica que el usuario exista y que la contraseña coincida
             if ($user && password_verify($password, $user->getContrasena())) {
@@ -30,7 +30,7 @@
         }
         //utilizar esta funcion si no ciframos contrasena
         public function verificaCredenciales(string $email, string $password): ?Usuarios {
-            $user = $this->userRepository->findLogin($email);
+            $user = $this->userRepository->findByemail($email);
             
             // Verifica que el usuario exista y que la contraseña coincida
             if ($user && $password == $user->getContrasena()) {
@@ -49,7 +49,7 @@
 
         public function obtenerUsuarioPorEmail(string $email): ?Usuarios {
             return $this->userRepository->findByEmail($email);
-        }        
+        }         
         
         public function actualizarUsuario(string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
             return $this->userRepository->actualizarUsuario($nombre, $apellidos, $email, $nuevoRol);
